@@ -1,12 +1,20 @@
-name: CI
+name: Build
+
 on:
   push:
-  workflow_dispatch:
+    branches: [master]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: fwilhe2/setup-kotlin@main
-      - run: kotlinc /java/com.example.bubbel/MainActivity.kt -include-runtime -d /tmp/hello.jar; java -jar /tmp/hello.jar
-      - run: kotlin myScript.main.kts
+      - uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+      - name: Build
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
