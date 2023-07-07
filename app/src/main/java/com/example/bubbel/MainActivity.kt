@@ -1,12 +1,10 @@
 package com.example.bubbel
 
 import android.os.Bundle
-import android.text.Layout.Alignment
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.*
 import androidx.compose.foundation.text.*
 import androidx.compose.material3.*
 import androidx.compose.material.icons.*
@@ -31,11 +29,17 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.*
 import androidx.compose.ui.text.input.*
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Alignment.Horizontal
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.Alignment
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -157,17 +161,12 @@ fun LoginInputs(){
            Row(
                horizontalArrangement = Arrangement.Center
            ) {
-               Text(
-                   text = "Pop-up notifications",
-                   color = Color.Black
-               )
            }
            Column(
                verticalArrangement = Arrangement.Center,
                modifier = Modifier
-                   .fillMaxWidth()
-                   .padding(top = 80.dp)
-                   .align(Alignment.Horizontal),
+                   .fillMaxWidth(),
+               horizontalAlignment = Alignment.CenterHorizontally
            ) {
                Button(
                    onClick = {
