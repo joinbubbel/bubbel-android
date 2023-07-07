@@ -176,7 +176,7 @@ fun LoginInputs(){
                    },
                    modifier = Modifier
                        .padding(top = 40.dp)
-                       .width(309.dp)
+                       .width(320.dp)
                        .height(56.dp)
                        .background(color = Color(0xFF0057FF), shape = RoundedCornerShape(10.dp))
                ) {
