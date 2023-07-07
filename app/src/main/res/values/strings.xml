@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Bubbel</string>
+    <string name="title_activity_main_compose">MainCompose</string>
 </resources>
