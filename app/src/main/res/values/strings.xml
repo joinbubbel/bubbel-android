@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Bubbel</string>
     <string name="title_activity_main_compose">MainCompose</string>
+    <string name="title_activity_sign_up_screen">SignUpScreen</string>
+    <string name="title_activity_dynamic_positioning.kt">DynamicPositioning.kt</string>
+    <string name="title_activity_dynamic_position">DynamicPosition</string>
+    <string name="title_activity_login_screen">LoginScreen</string>
+    <string name="title_activity_screen_view">ScreenView</string>
+    <string name="title_activity_login_view">LoginView</string>
+    <string name="title_activity_dynamic_widget_sizes">DynamicWidgetSizes</string>
 </resources>
