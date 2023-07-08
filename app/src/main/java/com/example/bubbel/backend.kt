@@ -63,7 +63,7 @@ class ResDeauthUser(
     val error: String
 )
 
-var bubbelBathDev: String = "https://bubbel-bath.onrender.com/api";
+var bubbelBathDev: String = "https://bubbel-bath.onrender.com";
 class FetchErrorException(message: String) : Exception(message)
 suspend fun signUp(email: String, username: String, password: String, isUsernameAvailable: Boolean = true) {
     if (!isValidEmail(email)) {
