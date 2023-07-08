@@ -22,22 +22,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.foundation.layout.offset
 import androidx.compose.ui.layout.layout
 
-class DynamicPosition : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            BubbelTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-
-                }
-            }
-        }
-    }
-}
-
 @Composable
 fun getScreenWidth(): Dp {
     val configuration = LocalConfiguration.current
