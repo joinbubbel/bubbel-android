@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -14,6 +15,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -43,32 +46,35 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalConfiguration
 import com.example.bubbel.CustomWidgets.ui.theme.*
 import com.example.bubbel.R
+import kotlinx.serialization.json.Json.Default.configuration
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpView(modifier: Modifier = Modifier) {
-    var username:String by remember {
+    var username: String by remember {
         mutableStateOf("")
     }
-    var password:String by remember {
+    var password: String by remember {
         mutableStateOf("")
     }
-    var email:String by remember {
+    var email: String by remember {
         mutableStateOf("")
     }
-    var confirmPassword:String by remember {
+    var confirmPassword: String by remember {
         mutableStateOf("")
     }
     BoxWithConstraints(
-       modifier = Modifier
-    ){
-        val maxWidth = constraints.maxWidth.dp
-        val isSmallScreen = maxWidth < 480.dp
-        val isMediumScreen = maxWidth < 720.dp
-        val isLargeScreen = maxWidth < 1080.dp
+        modifier = Modifier
+    ) {
+        val configuration = LocalConfiguration.current
+        val maxWidth = configuration.screenWidthDp.dp
+        val isSmallScreen = maxWidth < 360.dp
+        val isMediumScreen = 360.dp < maxWidth && maxWidth < 480.dp
+        val isLargeScreen = 480.dp < maxWidth && maxWidth < 600.dp
 
         fun DynamicPadding(
             isSmallScreen: Boolean,
@@ -78,7 +84,7 @@ fun SignUpView(modifier: Modifier = Modifier) {
             mediumScreenPadding: Int,
             largeScreenPadding: Int,
             xLargeScreenPadding: Int
-        ) :Int{
+        ): Int {
             return if (isSmallScreen) {
                 smallScreenPadding
             } else if (isMediumScreen) {
@@ -89,89 +95,86 @@ fun SignUpView(modifier: Modifier = Modifier) {
                 xLargeScreenPadding
             }
         }
-
-        val xPadding =
-
-        Box(
-            modifier = Modifier
-                .width(DynamicScreenWidth(widthFactor = 1.0f))
-                .background(Color(0xFF0057FF))
-                .clip(MaterialTheme.shapes.medium)
-        ) {
-            Text(
-                text = "Sign Up",
-                fontSize = (
-                        DynamicPadding(
-                            isSmallScreen,
-                            isMediumScreen,
-                            isLargeScreen,
-                            30,
-                            45,
-                            60,
-                            75
-                        ).sp
-                        ),
-                fontWeight = FontWeight.Medium,
-                color = Color.White,
-                modifier = Modifier.
-                padding(
-                    DynamicPadding(
-                        isSmallScreen,
-                        isMediumScreen,
-                        isLargeScreen,
-                        30,
-                        50,
-                        70,
-                        100
-                    ).dp,
-                    DynamicPadding(
-                        isSmallScreen,
-                        isMediumScreen,
-                        isLargeScreen,
-                        50,
-                        75,
-                        100,
-                        125
-                    ).dp,
-                )
-            )
-            Text(
-                text = "Fill in the form to register",
-                fontSize = (
+            Box(
+                modifier = Modifier
+                    .width(DynamicScreenWidth(widthFactor = 1.0f))
+                    .background(Color(0xFF0057FF))
+                    .clip(MaterialTheme.shapes.medium)
+            ) {
+                Text(
+                    text = "Sign Up",
+                    fontSize = (
+                            DynamicPadding(
+                                isSmallScreen,
+                                isMediumScreen,
+                                isLargeScreen,
+                                20,
+                                30,
+                                50,
+                                60
+                            ).sp
+                            ),
+                    fontWeight = FontWeight.Medium,
+                    color = Color.White,
+                    modifier = Modifier.padding(
                         DynamicPadding(
                             isSmallScreen,
                             isMediumScreen,
                             isLargeScreen,
                             20,
                             30,
-                            35,
-                            40
-                        ).sp
-                        ),
-                color = Color.White,
-                modifier = Modifier
-                    .offset(
-                        DynamicPadding(
-                            isSmallScreen,
-                            isMediumScreen,
-                            isLargeScreen,
-                            30,
-                            50,
-                            75,
-                            100
+                            40,
+                            50
+
                         ).dp,
                         DynamicPadding(
                             isSmallScreen,
                             isMediumScreen,
                             isLargeScreen,
-                            180,
-                            200,
-                            220,
-                            250
+                            70,
+                            90,
+                            110,
+                            130
                         ).dp,
                     )
-            )
-        }
+                )
+                Text(
+                    text = "Fill in the form to register",
+                    fontSize = (
+                            DynamicPadding(
+                                isSmallScreen,
+                                isMediumScreen,
+                                isLargeScreen,
+                                15,
+                                20,
+                                25,
+                                30
+                            ).sp
+                            ),
+                    color = Color.White,
+                    modifier = Modifier
+                        .offset(
+                            DynamicPadding(
+                                isSmallScreen,
+                                isMediumScreen,
+                                isLargeScreen,
+                                20,
+                                30,
+                                40,
+                                50
+                            ).dp,
+                            DynamicPadding(
+                                isSmallScreen,
+                                isMediumScreen,
+                                isLargeScreen,
+                                120,
+                                150,
+                                180,
+                                210
+                            ).dp,
+                        )
+                )
+            }
         Column(
             modifier = Modifier
                 .offset(
@@ -180,10 +183,10 @@ fun SignUpView(modifier: Modifier = Modifier) {
                         isSmallScreen,
                         isMediumScreen,
                         isLargeScreen,
-                        270,
+                        200,
+                        240,
                         300,
-                        330,
-                        360
+                        330
                     ).dp,
                 )
                 .width(
@@ -197,10 +200,10 @@ fun SignUpView(modifier: Modifier = Modifier) {
                     isSmallScreen,
                     isMediumScreen,
                     isLargeScreen,
+                    10,
+                    15,
                     20,
-                    30,
-                    35,
-                    40
+                   25
                 ).sp,
                 fontWeight = FontWeight(450),
                 color = Color(0xFF627394),
@@ -210,25 +213,38 @@ fun SignUpView(modifier: Modifier = Modifier) {
                         isMediumScreen,
                         isLargeScreen,
                         30,
+                        40,
                         50,
-                        70,
-                        100
+                        70
                     ).dp,
-                    0.dp)
+                    0.dp
+                )
             )
             Row(
                 modifier = Modifier
-                    .offset(0.dp, 10.dp)
+                    .offset(
+                        0.dp,
+                        DynamicPadding(
+                            isSmallScreen,
+                            isMediumScreen,
+                            isLargeScreen,
+                            5,
+                            10,
+                            15,
+                            20
+                        ).dp
+                    )
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
-                ) {
+            ) {
 
                 TextField(
                     value = username,
-                    onValueChange = {newUsername -> username = newUsername},
+                    onValueChange = { newUsername -> username = newUsername },
                     placeholder = { Text("Enter your username") },
                     leadingIcon = {
-                        Icon(painter = painterResource(R.drawable.profile),
+                        Icon(
+                            painter = painterResource(R.drawable.profile),
                             contentDescription = "My Icon",
                             tint = Color.Gray,
                             modifier = Modifier
@@ -240,15 +256,15 @@ fun SignUpView(modifier: Modifier = Modifier) {
                 )
             }
             Text(
-                text = "Email",
+                text = "Email Address",
                 fontSize = DynamicPadding(
                     isSmallScreen,
                     isMediumScreen,
                     isLargeScreen,
+                    10,
+                    15,
                     20,
-                    30,
-                    35,
-                    40
+                    25
                 ).sp,
                 fontWeight = FontWeight(450),
                 color = Color(0xFF627394),
@@ -258,304 +274,311 @@ fun SignUpView(modifier: Modifier = Modifier) {
                         isMediumScreen,
                         isLargeScreen,
                         30,
-                        50,
-                        70,
-                        100
-                    ).dp,
-                    DynamicPadding(
-                        isSmallScreen,
-                        isMediumScreen,
-                        isLargeScreen,
-                        10,
-                        15,
-                        20,
-                        25
-                    ).dp,
-                )
-            )
-            Row(
-                modifier = Modifier
-                    .offset(0.dp, 30.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ) {
-                TextField(
-                    value = username,
-                    onValueChange = {newUsername -> username = newUsername},
-                    placeholder = { Text("Enter your email") },
-                    leadingIcon = {
-                        Icon(painter = painterResource(R.drawable.profile),
-                            contentDescription = "My Icon",
-                            tint = Color.Gray,
-                            modifier = Modifier
-                                .padding(0.dp, 7.dp)
-                        )
-                    },
-                    modifier = Modifier
-                        .width(DynamicScreenWidth(widthFactor = 0.8f))
-                )
-
-                TextField(
-                    value = email,
-                    onValueChange = { newEmail -> email = newEmail },
-                    placeholder = { Text("Enter your email") },
-                    leadingIcon = {
-                        Icon(painter = painterResource(R.drawable.profile),
-                            contentDescription = "My Icon",
-                            tint = Color.Gray,
-                            modifier = Modifier
-                                .padding(0.dp, 7.dp)
-                        )
-                    },
-                    modifier = Modifier
-                        .width(DynamicScreenWidth(widthFactor = 0.8f))
-                )
-            }
-            Text(
-                text = "Email",
-                fontSize = DynamicPadding(
-                    isSmallScreen,
-                    isMediumScreen,
-                    isLargeScreen,
-                    20,
-                    30,
-                    35,
-                    40
-                ).sp,
-                fontWeight = FontWeight(450),
-                color = Color(0xFF627394),
-                modifier = Modifier.offset(
-                    DynamicPadding(
-                        isSmallScreen,
-                        isMediumScreen,
-                        isLargeScreen,
-                        30,
-                        50,
-                        70,
-                        100
-                    ).dp,
-                    DynamicPadding(
-                        isSmallScreen,
-                        isMediumScreen,
-                        isLargeScreen,
-                        10,
-                        15,
-                        20,
-                        25
-                    ).dp,
-                )
-            )
-            Row(
-                modifier = Modifier
-                    .offset(0.dp, 100.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ) {
-                TextField(
-                    value = email,
-                    onValueChange = { newEmail -> email = newEmail },
-                    placeholder = { Text("Enter your email") },
-                    leadingIcon = {
-                        Icon(painter = painterResource(R.drawable.profile),
-                            contentDescription = "My Icon",
-                            tint = Color.Gray,
-                            modifier = Modifier
-                                .padding(0.dp, 7.dp)
-                        )
-                    },
-                    modifier = Modifier
-                        .width(DynamicScreenWidth(widthFactor = 0.8f))
-                )
-            }
-            Text(
-                text = "Password",
-                fontSize = DynamicPadding(
-                    isSmallScreen,
-                    isMediumScreen,
-                    isLargeScreen,
-                    20,
-                    30,
-                    35,
-                    40
-                ).sp,
-                fontWeight = FontWeight(450),
-                color = Color(0xFF627394),
-                modifier = Modifier.offset(
-                    DynamicPadding(
-                        isSmallScreen,
-                        isMediumScreen,
-                        isLargeScreen,
-                        30,
-                        50,
-                        70,
-                        100
-                    ).dp,
-                    DynamicPadding(
-                        isSmallScreen,
-                        isMediumScreen,
-                        isLargeScreen,
-                        20,
-                        35,
                         40,
-                        65
+                        50,
+                        60
+                    ).dp,
+                    DynamicPadding(
+                        isSmallScreen,
+                        isMediumScreen,
+                        isLargeScreen,
+                        15,
+                        20,
+                        25,
+                        30
                     ).dp,
                 )
             )
             Row(
                 modifier = Modifier
-                    .offset(0.dp, 30.dp)
+                    .offset(
+                        0.dp,
+                        DynamicPadding(
+                            isSmallScreen,
+                            isMediumScreen,
+                            isLargeScreen,
+                            20,
+                            30,
+                            40,
+                            50
+                        ).dp
+                    )
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
             ) {
                 TextField(
-                    value = password,
-                    onValueChange = { newPassword -> password = newPassword },
+                    value = email,
+                    onValueChange = { newEmail -> email = newEmail },
                     placeholder = { Text("Enter your email") },
                     leadingIcon = {
-                        Icon(painter = painterResource(R.drawable.profile),
+                        Icon(
+                            painter = painterResource(R.drawable.profile),
                             contentDescription = "My Icon",
                             tint = Color.Gray,
-                            modifier = Modifier
-                                .padding(0.dp, 7.dp)
+                            modifier = Modifier.padding(0.dp, 7.dp)
                         )
                     },
                     modifier = Modifier
                         .width(DynamicScreenWidth(widthFactor = 0.8f))
+                        .fillMaxWidth()
                 )
             }
-
-
-
             Text(
                 text = "Password",
-                fontSize = 20.sp,
+                fontSize = DynamicPadding(
+                    isSmallScreen,
+                    isMediumScreen,
+                    isLargeScreen,
+                    10,
+                    15,
+                    20,
+                    25
+                ).sp,
                 fontWeight = FontWeight(450),
                 color = Color(0xFF627394),
-                modifier = Modifier.offset(18.dp, 40.dp)
-            )
-            Row(
-                modifier = Modifier
-                    .offset(0.dp, 50.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.profile),
-                    contentDescription = "My Icon",
-                    tint = Color.Gray,
-                    modifier = Modifier.padding(10.dp, 7.dp)
+                modifier = Modifier.offset(
+                    DynamicPadding(
+                        isSmallScreen,
+                        isMediumScreen,
+                        isLargeScreen,
+                        30,
+                        40,
+                        50,
+                        60
+                    ).dp,
+                    DynamicPadding(
+                        isSmallScreen,
+                        isMediumScreen,
+                        isLargeScreen,
+                        30,
+                        40,
+                        50,
+                        60
+                    ).dp,
                 )
+            )
+            Column(
+                modifier = Modifier
+                    .offset(
+                        0.dp,
+                        DynamicPadding(
+                            isSmallScreen,
+                            isMediumScreen,
+                            isLargeScreen,
+                            40,
+                            50,
+                            60,
+                            70
+                        ).dp
+                    )
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally),
+                horizontalAlignment = Alignment.CenterHorizontally
+                ,
+            ) {
                 TextField(
                     value = password,
                     onValueChange = { newPassword -> password = newPassword},
-                    placeholder = { Text("Enter Password") },
+                    placeholder = { Text("Enter your Password") },
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(R.drawable.profile),
+                            contentDescription = "My Icon",
+                            tint = Color.Gray,
+                            modifier = Modifier
+                                .padding(0.dp, 7.dp)
+                        )
+                    },
                     modifier = Modifier
-                        .height(40.dp))
+                        .width(DynamicScreenWidth(widthFactor = 0.8f))
+                )
             }
-            Text(
+        Text(
                 text = "Confirm Password",
-                fontSize = 20.sp,
+                fontSize = DynamicPadding(
+                    isSmallScreen,
+                    isMediumScreen,
+                    isLargeScreen,
+                    10,
+                    15,
+                    20,
+                    25
+                ).sp,
                 fontWeight = FontWeight(450),
                 color = Color(0xFF627394),
-                modifier = Modifier.offset(18.dp, 60.dp)
+                modifier = Modifier.offset(
+                    DynamicPadding(
+                        isSmallScreen,
+                        isMediumScreen,
+                        isLargeScreen,
+                        30,
+                        40,
+                        50,
+                        60
+                    ).dp,
+                    DynamicPadding(
+                        isSmallScreen,
+                        isMediumScreen,
+                        isLargeScreen,
+                        50,
+                        60,
+                        70,
+                        80
+                    ).dp,
+                )
             )
             Row(
                 modifier = Modifier
-                    .offset(0.dp, 70.dp)
+                    .offset(
+                        0.dp,
+                        DynamicPadding(
+                            isSmallScreen,
+                            isMediumScreen,
+                            isLargeScreen,
+                            50,
+                            70,
+                            80,
+                            90
+                        ).dp
+                    )
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
             ) {
-                Icon(
-                    painter = painterResource(R.drawable.profile),
-                    contentDescription = "My Icon",
-                    tint = Color.Gray,
-                    modifier = Modifier.padding(10.dp, 7.dp)
-                )
                 TextField(
                     value = confirmPassword,
-                    onValueChange = { newConfirmPassword -> confirmPassword = newConfirmPassword },
-                    placeholder = { Text("Retype password") },
+                    onValueChange = { newConfirmPassword -> confirmPassword = confirmPassword},
+                    placeholder = { Text("confirm password") },
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(R.drawable.profile),
+                            contentDescription = "My Icon",
+                            tint = Color.Gray,
+                            modifier = Modifier
+                                .padding(0.dp, 7.dp)
+                        )
+                    },
                     modifier = Modifier
-                        .height(40.dp)
+                        .width(DynamicScreenWidth(widthFactor = 0.8f))
                 )
             }
         }
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .offset(0.dp, 300.dp)
-                .align(Alignment.Center)
-        ) {
-            Button(
-                onClick = {
-                    println(username)
-                    println(password)
-                },
-                colors = ButtonDefaults.buttonColors(Color(0xFF0057FF)),
                 modifier = Modifier
-                    .padding(top = 40.dp)
-                    .width(320.dp)
-                    .height(56.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text(
-                    text = "Log In",
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight(450),
-                        color = Color.White,
-                        textAlign = TextAlign.Center
-                    )
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun CustomTextField(
-    modifier: Modifier = Modifier,
-    leadingIcon: (@Composable () -> Unit)? = null,
-    trailingIcon: (@Composable () -> Unit)? = null,
-    placeholderText: String = "Placeholder",
-    fontSize: TextUnit = typography.bodyMedium.fontSize
-) {
-    var text by rememberSaveable { mutableStateOf("") }
-    BasicTextField(modifier = modifier
-        .background(
-            MaterialTheme.colorScheme.surface,
-            MaterialTheme.shapes.small,
-        )
-        .fillMaxWidth(),
-        value = text,
-        onValueChange = {
-            text = it
-        },
-        singleLine = true,
-        cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
-        textStyle = LocalTextStyle.current.copy(
-            color = MaterialTheme.colorScheme.onSurface,
-            fontSize = fontSize
-        ),
-        decorationBox = { innerTextField ->
-            Row(
-                modifier,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                if (leadingIcon != null) leadingIcon()
-                Box(Modifier.weight(1f)) {
-                    if (text.isEmpty()) Text(
-                        placeholderText,
-                        style = LocalTextStyle.current.copy(
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f),
-                            fontSize = fontSize
+            Button(
+                    onClick = {
+                        println(username)
+                        println(password)
+                    },
+                    colors = ButtonDefaults.buttonColors(Color(0xFF0057FF)),
+                    modifier = Modifier
+                        .offset(
+                            0.dp,
+                            DynamicPadding(
+                                isSmallScreen,
+                                isMediumScreen,
+                                isLargeScreen,
+                                580,
+                                640,
+                                700,
+                                760
+                            ).dp
+                        )
+                        .width(320.dp)
+                        .height(56.dp)
+                ) {
+                    Text(
+                        text = "Sign Up",
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight(450),
+                            color = Color.White,
+                            textAlign = TextAlign.Center
                         )
                     )
-                    innerTextField()
                 }
-                if (trailingIcon != null) trailingIcon()
+            Button(
+                    onClick = {
+                        println(username)
+                        println(password)
+                    },
+                    colors = ButtonDefaults.buttonColors(Color(0xFF0057FF)),
+                    modifier = Modifier
+                        .offset(
+                            0.dp,
+                            DynamicPadding(
+                                isSmallScreen,
+                                isMediumScreen,
+                                isLargeScreen,
+                                600,
+                                660,
+                                720,
+                                800
+                            ).dp
+                        )
+                        .width(320.dp)
+                        .height(56.dp)
+
+
+                ) {
+                    Text(
+                        text = "Log In",
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight(450),
+                            color = Color.White,
+                            textAlign = TextAlign.Center
+                        )
+                    )
+                }
             }
-        }
-    )
+    }
 }
-
-
+        @Composable
+        fun CustomTextField(
+            modifier: Modifier = Modifier,
+            leadingIcon: (@Composable () -> Unit)? = null,
+            trailingIcon: (@Composable () -> Unit)? = null,
+            placeholderText: String = "Placeholder",
+            fontSize: TextUnit = typography.bodyMedium.fontSize
+        ) {
+            var text by rememberSaveable { mutableStateOf("") }
+            BasicTextField(modifier = modifier
+                .background(
+                    MaterialTheme.colorScheme.surface,
+                    MaterialTheme.shapes.small,
+                )
+                .fillMaxWidth(),
+                value = text,
+                onValueChange = {
+                    text = it
+                },
+                singleLine = true,
+                cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+                textStyle = LocalTextStyle.current.copy(
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontSize = fontSize
+                ),
+                decorationBox = { innerTextField ->
+                    Row(
+                        modifier,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        if (leadingIcon != null) leadingIcon()
+                        Box(Modifier.weight(1f)) {
+                            if (text.isEmpty()) Text(
+                                placeholderText,
+                                style = LocalTextStyle.current.copy(
+                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f),
+                                    fontSize = fontSize
+                                )
+                            )
+                            innerTextField()
+                        }
+                        if (trailingIcon != null) trailingIcon()
+                    }
+                }
+            )
+    }
