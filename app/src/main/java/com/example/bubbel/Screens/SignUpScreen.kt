@@ -49,6 +49,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalConfiguration
 import com.example.bubbel.CustomWidgets.ui.theme.*
 import com.example.bubbel.R
+import com.example.bubbel.CustomWidgets.ui.theme.DynamicPadding
 import kotlinx.serialization.json.Json.Default.configuration
 
 
@@ -76,25 +77,7 @@ fun SignUpView(modifier: Modifier = Modifier) {
         val isMediumScreen = 360.dp < maxWidth && maxWidth < 480.dp
         val isLargeScreen = 480.dp < maxWidth && maxWidth < 600.dp
 
-        fun DynamicPadding(
-            isSmallScreen: Boolean,
-            isMediumScreen: Boolean,
-            isLargeScreen: Boolean,
-            smallScreenPadding: Int,
-            mediumScreenPadding: Int,
-            largeScreenPadding: Int,
-            xLargeScreenPadding: Int
-        ): Int {
-            return if (isSmallScreen) {
-                smallScreenPadding
-            } else if (isMediumScreen) {
-                mediumScreenPadding
-            } else if (isLargeScreen) {
-                largeScreenPadding
-            } else {
-                xLargeScreenPadding
-            }
-        }
+
             Box(
                 modifier = Modifier
                     .width(DynamicScreenWidth(widthFactor = 1.0f))
@@ -446,7 +429,7 @@ fun SignUpView(modifier: Modifier = Modifier) {
             ) {
                 TextField(
                     value = confirmPassword,
-                    onValueChange = { newConfirmPassword -> confirmPassword = confirmPassword},
+                    onValueChange = { newConfirmPassword -> confirmPassword = newConfirmPassword},
                     placeholder = { Text("confirm password") },
                     leadingIcon = {
                         Icon(
@@ -470,7 +453,9 @@ fun SignUpView(modifier: Modifier = Modifier) {
             Button(
                     onClick = {
                         println(username)
+                        println(email)
                         println(password)
+                        println(confirmPassword)
                     },
                     colors = ButtonDefaults.buttonColors(Color(0xFF0057FF)),
                     modifier = Modifier
@@ -499,16 +484,13 @@ fun SignUpView(modifier: Modifier = Modifier) {
                         )
                     )
                 }
-            Button(
-                    onClick = {
-                        println(username)
-                        println(password)
-                    },
-                    colors = ButtonDefaults.buttonColors(Color(0xFF0057FF)),
-                    modifier = Modifier
-                        .offset(
-                            0.dp,
-                            DynamicPadding(
+
+            HyperlinkText(
+                Url = "https://github.com/",
+                Text = "Log In",
+                textSize = 16,
+                horizontalOffset = 0,
+                verticalOffset = DynamicPadding(
                                 isSmallScreen,
                                 isMediumScreen,
                                 isLargeScreen,
@@ -516,69 +498,8 @@ fun SignUpView(modifier: Modifier = Modifier) {
                                 660,
                                 720,
                                 800
-                            ).dp
-                        )
-                        .width(320.dp)
-                        .height(56.dp)
-
-
-                ) {
-                    Text(
-                        text = "Log In",
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight(450),
-                            color = Color.White,
-                            textAlign = TextAlign.Center
-                        )
-                    )
-                }
-            }
+                            )
+            )
+        }
     }
 }
-        @Composable
-        fun CustomTextField(
-            modifier: Modifier = Modifier,
-            leadingIcon: (@Composable () -> Unit)? = null,
-            trailingIcon: (@Composable () -> Unit)? = null,
-            placeholderText: String = "Placeholder",
-            fontSize: TextUnit = typography.bodyMedium.fontSize
-        ) {
-            var text by rememberSaveable { mutableStateOf("") }
-            BasicTextField(modifier = modifier
-                .background(
-                    MaterialTheme.colorScheme.surface,
-                    MaterialTheme.shapes.small,
-                )
-                .fillMaxWidth(),
-                value = text,
-                onValueChange = {
-                    text = it
-                },
-                singleLine = true,
-                cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
-                textStyle = LocalTextStyle.current.copy(
-                    color = MaterialTheme.colorScheme.onSurface,
-                    fontSize = fontSize
-                ),
-                decorationBox = { innerTextField ->
-                    Row(
-                        modifier,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        if (leadingIcon != null) leadingIcon()
-                        Box(Modifier.weight(1f)) {
-                            if (text.isEmpty()) Text(
-                                placeholderText,
-                                style = LocalTextStyle.current.copy(
-                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f),
-                                    fontSize = fontSize
-                                )
-                            )
-                            innerTextField()
-                        }
-                        if (trailingIcon != null) trailingIcon()
-                    }
-                }
-            )
-    }

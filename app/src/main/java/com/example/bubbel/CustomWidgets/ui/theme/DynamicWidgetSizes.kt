@@ -32,3 +32,23 @@ fun DynamicScreenHeight(heightFactor: Float): Dp {
     val boardHeight = (shortestSide * heightFactor).dp
     return boardHeight
 }
+
+fun DynamicPadding(
+    isSmallScreen: Boolean,
+    isMediumScreen: Boolean,
+    isLargeScreen: Boolean,
+    smallScreenPadding: Int,
+    mediumScreenPadding: Int,
+    largeScreenPadding: Int,
+    xLargeScreenPadding: Int
+): Int {
+    return if (isSmallScreen) {
+        smallScreenPadding
+    } else if (isMediumScreen) {
+        mediumScreenPadding
+    } else if (isLargeScreen) {
+        largeScreenPadding
+    } else {
+        xLargeScreenPadding
+    }
+}
