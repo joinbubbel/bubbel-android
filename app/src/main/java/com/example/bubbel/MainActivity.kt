@@ -10,9 +10,16 @@ import androidx.activity.compose.setContent
 import com.example.bubbel.Screens.*
 
 
+
+//backend import
+import com.example.bubbel.*
+
 //layout imports
 import com.example.bubbel.R.layout.activity_signup
 import com.example.bubbel.R.layout.activity_login
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MainActivity : ComponentActivity() {
@@ -56,7 +63,7 @@ class MainActivity : ComponentActivity() {
             }
             fun signUpScreen(){
                 setContentView(R.layout.activity_signup)
-                fun submitSignUp() {
+                suspend fun submitSignUp() {
                     //Get inputs from text field
                     val usernameInput: EditText = findViewById(R.id.usernameInputFieldSignup)
                     val passwordInput: EditText = findViewById(R.id.passwordInputFieldSignup)
@@ -69,16 +76,32 @@ class MainActivity : ComponentActivity() {
                     val email:String = emailInput.text.toString()
                     val confirmPassword:String = confirmPasswordInput.text.toString()
 
+                    //Check if password = confirm password
+                    if (password != confirmPassword){
+                        println("Password and confirm password do not match")
+                        return
+                    }
+
+                    //Create user
+                    val user = InCreateUser(email, username, password)
+
                     //Verifying info
-                    println("Username is $username")
-                    println("Email is $email")
-                    println("Password is $password")
-                    print("Confirmed Password is $confirmPassword")
+                    println(user)
+                    println(username)
+                    println(password)
+                    println(confirmPassword)
+                    println(email)
+
+                    //Create api request
+                    createUserAPIRequest(user)
                 }
-                val signUpButton: Button = findViewById(R.id.signUpButton)
+                var signUpButton: Button = findViewById(R.id.signUpButton)
 
                 signUpButton.setOnClickListener {
-                    submitSignUp()
+                    CoroutineScope(Dispatchers.Main).launch {
+                        submitSignUp()
+                        println("success")
+                    }
                 }
             }
             if (!isLoggedIn){
