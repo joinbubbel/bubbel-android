@@ -1,55 +1,98 @@
 package com.example.bubbel
 
-import android.media.Image
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Website.URL
+import android.text.Html
+import android.text.method.LinkMovementMethod
+import android.view.View
+import android.widget.*
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.*
-import androidx.compose.foundation.text.*
-import androidx.compose.material.icons.*
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.node.*
-import androidx.compose.ui.platform.*
-import androidx.compose.ui.res.*
-import androidx.compose.ui.text.*
-import androidx.compose.ui.text.font.*
-import androidx.compose.ui.text.input.*
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.*
-import androidx.compose.ui.unit.*
-import androidx.compose.material.icons.*
-import androidx.compose.ui.layout.HorizontalAlignmentLine
-import androidx.compose.ui.semantics.Role.Companion.Image
-import androidx.compose.ui.text.style.TextDecoration
-import com.example.bubbel.*
 import com.example.bubbel.Screens.*
-import com.example.bubbel.ui.theme.*
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
-import java.net.HttpURLConnection
-import java.net.URL
+
+
+//layout imports
+import com.example.bubbel.R.layout.activity_signup
+import com.example.bubbel.R.layout.activity_login
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-           SignUpView()
+            var isLoggedIn = true
+            var isFirstTime = true
+
+
+            fun loginScreen(){
+                setContentView(R.layout.activity_login)
+
+                val textView: TextView = findViewById(R.id.forgotPasswordLink)
+                textView.text = Html.fromHtml("<a href=\"https://developer.android.com/topic/libraries/view-binding\">Forgot Password?</a>")
+                textView.movementMethod = LinkMovementMethod.getInstance()
+
+                val signUp:TextView = findViewById(R.id.signUpLink)
+                signUp.text = Html.fromHtml("<a href=\"https://developer.android.com/topic/libraries/view-binding\">Sign Up ></a>")
+                signUp.movementMethod = LinkMovementMethod.getInstance()
+
+                fun submitLogIn() {
+                    //retrieve user input from login screen
+                    val usernameInput: EditText = findViewById(R.id.usernameInputField)
+                    val passwordInput: EditText = findViewById(R.id.passwordInputField)
+
+                    //turn it into a string
+                    val username: String = usernameInput.text.toString()
+                    val password: String = passwordInput.text.toString()
+
+                    //Verify the data
+                    println("Username is $username")
+                    println("Password is $password")
+                }
+
+                val logInButton: Button = findViewById(R.id.loginButton)
+
+                logInButton.setOnClickListener {
+                    submitLogIn()
+                }
+            }
+            fun signUpScreen(){
+                setContentView(R.layout.activity_signup)
+                fun submitSignUp() {
+                    //Get inputs from text field
+                    val usernameInput: EditText = findViewById(R.id.usernameInputFieldSignup)
+                    val passwordInput: EditText = findViewById(R.id.passwordInputFieldSignup)
+                    val emailInput:EditText = findViewById(R.id.emailInputFieldSignup)
+                    val confirmPasswordInput:EditText = findViewById(R.id.confirmPasswordInputFieldSignup)
+
+                    //Turn this values into strings
+                    val username: String = usernameInput.text.toString()
+                    val password: String = passwordInput.text.toString()
+                    val email:String = emailInput.text.toString()
+                    val confirmPassword:String = confirmPasswordInput.text.toString()
+
+                    //Verifying info
+                    println("Username is $username")
+                    println("Email is $email")
+                    println("Password is $password")
+                    print("Confirmed Password is $confirmPassword")
+                }
+                val signUpButton: Button = findViewById(R.id.signUpButton)
+
+                signUpButton.setOnClickListener {
+                    submitSignUp()
+                }
+            }
+            if (!isLoggedIn){
+                loginScreen()
+            }
+            if (isFirstTime){
+                signUpScreen()
+                isFirstTime = false
+            }
+            else{
+                println("Home")
+            }
         }
     }
 }
-
 
 
