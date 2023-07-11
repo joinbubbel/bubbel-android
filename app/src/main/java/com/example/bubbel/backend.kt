@@ -35,11 +35,6 @@ class InCreateUser(
 }
 
 @Serializable
-class ResCreateUser(
-    val error: CreateUserError?,
-)
-
-@Serializable
 class CreateUserError(
 	var type: String,
 	var ierror: String?,

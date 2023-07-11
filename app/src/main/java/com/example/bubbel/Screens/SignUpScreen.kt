@@ -76,9 +76,7 @@ fun SignUpView(modifier: Modifier = Modifier) {
         val isSmallScreen = maxWidth < 360.dp
         val isMediumScreen = 360.dp < maxWidth && maxWidth < 480.dp
         val isLargeScreen = 480.dp < maxWidth && maxWidth < 600.dp
-
-
-            Box(
+        Box(
                 modifier = Modifier
                     .width(DynamicScreenWidth(widthFactor = 1.0f))
                     .background(Color(0xFF0057FF))
@@ -484,22 +482,6 @@ fun SignUpView(modifier: Modifier = Modifier) {
                         )
                     )
                 }
-
-            HyperlinkText(
-                Url = "https://github.com/",
-                Text = "Log In",
-                textSize = 16,
-                horizontalOffset = 0,
-                verticalOffset = DynamicPadding(
-                                isSmallScreen,
-                                isMediumScreen,
-                                isLargeScreen,
-                                600,
-                                660,
-                                720,
-                                800
-                            )
-            )
         }
     }
 }
