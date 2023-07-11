@@ -21,7 +21,7 @@ class InCreateUser(
     @SerialName("username")
     var username: String,
     @SerialName("password")
-    var password: String
+    var password: String,
 ) {
     companion object {
         fun fromJson(json: String): InCreateUser {
@@ -36,31 +36,43 @@ class InCreateUser(
 
 @Serializable
 class ResCreateUser(
-    val error: String
+    val error: CreateUserError?,
+)
+
+@Serializable
+class CreateUserError(
+	var type: String,
+	var ierror: String?,
+)
+
+@Serializable
+class ResCreateUser(
+	val error: CreateUserError?,
 )
 
 @Serializable
 class InAuthUser(
-    val username: String,
-    val password: String
+    var username: String,
+    var password: String,
 )
 
 @Serializable
 class ResAuthUser(
-    val error: String,
-    val token: String,
-    val username: String,
-    val email: String
+    val error: AuthUserError?,
+    val token: String?,
+    val username: String?,
+    val email: String?,
+)
+
+@Serializable
+class AuthUserError(
+	val type: String,
+	val ierror: String?,
 )
 
 @Serializable
 class InDeauthUser(
-    val token: String
-)
-
-@Serializable
-class ResDeauthUser(
-    val error: String
+    var token: String,
 )
 
 var bubbelBathDev: String = "https://bubbel-bath.onrender.com";
