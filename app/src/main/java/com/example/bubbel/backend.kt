@@ -37,12 +37,19 @@ class InCreateUser(
 @Serializable
 class CreateUserError(
 	var type: String,
-	var ierror: String?,
+	var error: String?,
 )
 
 @Serializable
 class ResCreateUser(
-	val error: CreateUserError?,
+    @SerialName("error")
+    val error: CreateUserError?,
+    @SerialName("token")
+    val token: String?,
+    @SerialName("username")
+    val username: String?,
+    @SerialName("email")
+    val email: String?
 )
 
 @Serializable
@@ -62,7 +69,7 @@ class ResAuthUser(
 @Serializable
 class AuthUserError(
 	val type: String,
-	val ierror: String?,
+	val error: String?,
 )
 
 @Serializable
@@ -70,8 +77,10 @@ class InDeauthUser(
     var token: String,
 )
 
-var bubbelBathDev: String = "https://bubbel-bath.onrender.com";
+var bubbelBathDev: String = "https://bubbel-bath.onrender.com/api";
+
 class FetchErrorException(message: String) : Exception(message)
+
 suspend fun signUp(email: String, username: String, password: String, isUsernameAvailable: Boolean = true) {
     if (!isValidEmail(email)) {
         println("Invalid email format")
@@ -96,13 +105,13 @@ suspend fun signUp(email: String, username: String, password: String, isUsername
             val responseEmail = response.email
             // Continue with further processing
         }
-    } catch (e: Exception) {
+    } catch (e: FetchErrorException) {
         // Handle the error
-        println("Error: $e")
+        println("Error: ${e.message}")
     }
 }
 
-suspend fun createUserAPIRequest(request: InCreateUser): ResAuthUser {
+suspend fun createUserAPIRequest(request: InCreateUser): ResCreateUser = withContext(Dispatchers.IO) {
     val encoder = Json { ignoreUnknownKeys = true }
     val json = encoder.encodeToString(request)
     println(json)
@@ -121,7 +130,7 @@ suspend fun createUserAPIRequest(request: InCreateUser): ResAuthUser {
         println(responseString)
         val decoder = Json { ignoreUnknownKeys = true }
         try {
-            return decoder.decodeFromString(responseString)
+            decoder.decodeFromString(responseString)
         } catch (ex: SerializationException) {
             throw FetchErrorException("Error decoding response: ${ex.message}")
         }

@@ -20,6 +20,7 @@ import com.example.bubbel.R.layout.activity_login
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.serialization.SerializationException
 
 
 class MainActivity : ComponentActivity() {
@@ -93,7 +94,13 @@ class MainActivity : ComponentActivity() {
                     println(email)
 
                     //Create api request
+                    try {
                     createUserAPIRequest(user)
+                        println("cowfire")
+                    } catch (ex: SerializationException){
+                        throw FetchErrorException("Error decoding response: ${ex.message}")
+                        println("Firecow")
+                    }
                 }
                 var signUpButton: Button = findViewById(R.id.signUpButton)
 
