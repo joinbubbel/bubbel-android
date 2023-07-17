@@ -15,7 +15,6 @@ class LoginActivity : AppCompatActivity() {
             setContentView(R.layout.activity_login)
         }
 
-
         val usernameInput: EditText = findViewById(R.id.usernameInputField);
         val passwordInput: EditText = findViewById(R.id.passwordInputField);
         val username:String = usernameInput.getText().toString()
