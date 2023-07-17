@@ -42,6 +42,7 @@ android {
     }
     buildFeatures {
         compose true
+        dataBinding = true
         viewBinding = true
     }
     composeOptions {
@@ -76,6 +77,7 @@ dependencies {
     implementation platform('androidx.compose:compose-bom:2022.10.00')
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.appcompat:appcompat'
+    implementation 'androidx.core:core-ktx:+'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit'
     androidTestImplementation 'androidx.test.espresso:espresso-core'
@@ -96,4 +98,5 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
     implementation 'androidx.compose.material:material-icons-core'
     implementation 'androidx.compose.material:material-icons-extended'
+    implementation 'androidx.fragment:fragment-ktx:1.6.0'
 }

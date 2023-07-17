@@ -1,3 +1,7 @@
+import com.example.bubbel.model.FetchErrorException
+import com.example.bubbel.model.InCreateUser
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import kotlinx.serialization.descriptors.*
@@ -173,7 +177,9 @@ suspend fun bubbelApiCreateUser(request: InCreateUser): ResCreateUser = withCont
     val responseCode = urlConnection.responseCode
     if (responseCode == HttpURLConnection.HTTP_OK) {
         val responseString = urlConnection.inputStream.bufferedReader().use { it.readText() }
+        println("________________________")
         println(responseString)
+        println("________________________")
         val decoder = Json { ignoreUnknownKeys = true }
         try {
             decoder.decodeFromString(responseString)
