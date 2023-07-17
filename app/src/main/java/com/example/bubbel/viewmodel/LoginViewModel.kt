@@ -11,8 +11,6 @@ import com.example.bubbel.R
 
 class LoginViewModel:ViewModel() {
         fun submitLogIn(username:String, password:String) {
-            //retrieve user input from login screen
-
 
             //Verify the data
             println("Username is $username")
