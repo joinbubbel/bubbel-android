@@ -1,40 +1,57 @@
 package com.example.bubbel.view
 
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.example.bubbel.databinding.ActivitySignupBinding
+import com.example.bubbel.databinding.MainLayoutBinding
+import com.example.bubbel.viewmodel.LoginViewModel
 import com.example.bubbel.viewmodel.SignUpViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SignUpView : AppCompatActivity() {
+class SignUpView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
+    private var binding: ActivitySignupBinding =
+        ActivitySignupBinding.inflate(LayoutInflater.from(context), this, true)
+    private lateinit var viewModel: SignUpViewModel
 
-    private lateinit var binding: ActivitySignupBinding
-    private val viewModel: SignUpViewModel by viewModels()
+    init {
+        setupViews()
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivitySignupBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    private fun setupViews() {
+        val signUpButton = binding.signUpButton
 
-        //Retrieve text input from screen
-        val username:String = binding.usernameInputFieldSignup.toString()
-        val email:String = binding.emailInputFieldSignup.toString()
-        val password:String = binding.passwordInputFieldSignup.toString()
-        val confirmPassword = binding.confirmPasswordInputFieldSignup.toString()
+        signUpButton.setOnClickListener {
+            val username = binding.usernameInputFieldSignup.text.toString()
+            val email = binding.emailInputFieldSignup.text.toString()
+            val password = binding.passwordInputFieldSignup.text.toString()
+            val confirmPassword = binding.confirmPasswordInputFieldSignup.text.toString()
 
-        binding.signUpButton.setOnClickListener {
+            // Pass the input values to the SignUpViewModel for further processing
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel.submitSignUp(username, email, password, confirmPassword)
                 println("success")
             }
         }
+    }
+
+    fun setViewModel(viewModel: SignUpViewModel) {
+        this.viewModel = viewModel
     }
 
 

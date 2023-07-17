@@ -8,8 +8,6 @@ import kotlinx.serialization.SerializationException
 
 class SignUpViewModel: ViewModel() {
         suspend fun submitSignUp(username: String, email:String, password:String, confirmPassword:String) {
-            //Retrieve text input from SignUpView
-
             //Check if password = confirm password
             if (password != confirmPassword){
                 println("Password and confirm password do not match")
