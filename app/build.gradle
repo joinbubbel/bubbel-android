@@ -55,7 +55,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx'
@@ -98,4 +97,6 @@ dependencies {
     implementation 'androidx.compose.material:material-icons-core'
     implementation 'androidx.compose.material:material-icons-extended'
     implementation 'androidx.fragment:fragment-ktx:1.6.0'
+    implementation("androidx.navigation:navigation-fragment-ktx")
+    implementation("androidx.navigation:navigation-ui-ktx")
 }
