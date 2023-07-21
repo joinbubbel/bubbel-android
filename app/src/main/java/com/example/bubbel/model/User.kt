@@ -11,10 +11,11 @@ data class VerifyAccountError (
     val ierror: String? = null
 )
 
+@Serializable
 data class InCreateUser (
         val email: String,
+        val username: String,
         val password: String,
-        val username: String
         )
 
 @Serializable

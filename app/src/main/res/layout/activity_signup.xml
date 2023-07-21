@@ -118,7 +118,7 @@
 
         <EditText
             android:autofillHints="Email Address"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:id="@+id/passwordInputFieldSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
 
         <EditText
             android:autofillHints="Email Address"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:id="@+id/confirmPasswordInputFieldSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

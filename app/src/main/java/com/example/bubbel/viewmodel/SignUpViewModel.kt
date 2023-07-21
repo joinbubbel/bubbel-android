@@ -6,6 +6,8 @@ import com.example.bubbel.model.FetchErrorException
 import com.example.bubbel.model.InCreateUser
 import kotlinx.serialization.SerializationException
 
+
+
 class SignUpViewModel: ViewModel() {
         suspend fun submitSignUp(username: String, email:String, password:String, confirmPassword:String) {
             //Check if password = confirm password
