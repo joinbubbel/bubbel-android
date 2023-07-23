@@ -208,6 +208,7 @@ enum class IndigoType(val value: String) {
 
 val BUBBEL_BATH_DEV = "https://bubbel-bath.onrender.com"
 
+class FetchErrorException(message: String) : Exception(message)
 suspend fun bubbelApiCreateUser(request: InCreateUser): ResCreateUser = withContext(Dispatchers.IO) {
         val encoder = Json { ignoreUnknownKeys = true }
         val json = encoder.encodeToString(request)

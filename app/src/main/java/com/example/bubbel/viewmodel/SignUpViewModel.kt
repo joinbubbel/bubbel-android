@@ -1,11 +1,10 @@
 package com.example.bubbel.viewmodel
 
+import InCreateUser
 import androidx.lifecycle.ViewModel
 import bubbelApiCreateUser
-import com.example.bubbel.model.FetchErrorException
-import com.example.bubbel.model.InCreateUser
 import kotlinx.serialization.SerializationException
-
+import FetchErrorException
 
 
 class SignUpViewModel: ViewModel() {
@@ -37,3 +36,4 @@ class SignUpViewModel: ViewModel() {
             }
         }
 }
+
