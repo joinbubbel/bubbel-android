@@ -1,3 +1,49 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashScreenFragment">
+
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.example.bubbel.view.SplashFragment"
+        tools:layout="@layout/activity_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.bubbel.view.SignUpFragment"
+        tools:layout="@layout/activity_signup" >
+        <action
+            android:id="@+id/action_signUpFragment_to_verificationFragment"
+            app:destination="@id/verificationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.bubbel.view.LoginFragment"
+        tools:layout="@layout/activity_login"/>
+
+    <fragment
+        android:id="@+id/verificationFragment"
+        android:name="com.example.bubbel.view.LoginFragment"
+        tools:layout="@layout/verification"/>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.bubbel.view.HomeFragment"
+        tools:layout="@layout/activity_home"/>
+</navigation>
+
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

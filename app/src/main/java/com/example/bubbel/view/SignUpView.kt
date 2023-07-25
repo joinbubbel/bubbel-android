@@ -1,36 +1,30 @@
 package com.example.bubbel.view
 
-
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
-import androidx.activity.viewModels
-import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.bubbel.databinding.ActivitySignupBinding
-import com.example.bubbel.databinding.MainLayoutBinding
-import com.example.bubbel.viewmodel.LoginViewModel
 import com.example.bubbel.viewmodel.SignUpViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SignUpView @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
-    private var binding: ActivitySignupBinding =
-        ActivitySignupBinding.inflate(LayoutInflater.from(context), this, true)
-    private lateinit var viewModel: SignUpViewModel
+class SignUpFragment : Fragment() {
+    private lateinit var binding: ActivitySignupBinding
+    private val viewModel: SignUpViewModel by viewModels()
 
-    init {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = ActivitySignupBinding.inflate(inflater, container, false)
         setupViews()
+        return binding.root
     }
 
     private fun setupViews() {
@@ -44,15 +38,10 @@ class SignUpView @JvmOverloads constructor(
 
             // Pass the input values to the SignUpViewModel for further processing
             CoroutineScope(Dispatchers.Main).launch {
+                println("success")
                 viewModel.submitSignUp(username, email, password, confirmPassword)
                 println("success")
             }
         }
     }
-
-    fun setViewModel(viewModel: SignUpViewModel) {
-        this.viewModel = viewModel
-    }
-
-
 }
