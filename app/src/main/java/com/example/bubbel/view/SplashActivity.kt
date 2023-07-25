@@ -1,6 +1,5 @@
 package com.example.bubbel.view
 
-
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,44 +9,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.bubbel.R
-import com.example.bubbel.databinding.ActivitySplashBinding
 
 class SplashFragment : Fragment() {
-    private lateinit var binding: ActivitySplashBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = ActivitySplashBinding.inflate(inflater, container, false)
-        return binding.root
+        return inflater.inflate(R.layout.activity_splash, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Handler(Looper.getMainLooper()).postDelayed({
             findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
-
-import android.content.Intent
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import androidx.appcompat.app.AppCompatActivity
-import com.example.bubbel.R
-import com.example.bubbel.databinding.ActivitySplashBinding
-
-class SplashActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySplashBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashActivity, MainActivity::class.java)
-            startActivity(intent)
-            finish()
         }, DELAY_MILLIS)
     }
 

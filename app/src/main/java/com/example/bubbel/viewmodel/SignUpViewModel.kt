@@ -6,7 +6,6 @@ import bubbelApiCreateUser
 import kotlinx.serialization.SerializationException
 import FetchErrorException
 import bubbelApiCreateUser
-import FetchErrorException
 
 
 class SignUpViewModel: ViewModel() {
