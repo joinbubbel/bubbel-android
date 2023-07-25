@@ -1,38 +1,31 @@
 package com.example.bubbel.view
 
-//Library dependencies
-import android.os.Bundle
-import android.text.Html
-import android.text.method.LinkMovementMethod
-import android.view.View
-import android.view.ViewGroup
-import android.widget.*
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.Menu
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.example.bubbel.R
-
-//backend import
-
-//layout imports
 import com.example.bubbel.databinding.MainLayoutBinding
-import com.example.bubbel.viewmodel.SignUpViewModel
 
-class MainActivity : ComponentActivity() {
-    private lateinit var signUpView: SignUpView
-    private val viewModel: SignUpViewModel by viewModels()
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: MainLayoutBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_layout)
+        binding = MainLayoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
 
-        val container: ViewGroup = findViewById(R.id.screenContainer)
+    override fun onSupportNavigateUp(): Boolean {
+        return findNavController(R.id.nav_host_fragment).navigateUp()
+    }
 
-        signUpView = SignUpView(this)
-        signUpView.setViewModel(viewModel)
-
-        container.addView(signUpView)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        // do something with navController
+        return super.onCreateOptionsMenu(menu)
     }
 }
-
-

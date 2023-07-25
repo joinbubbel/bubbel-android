@@ -1,33 +1,46 @@
 package com.example.bubbel.view
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.widget.EditText
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.bubbel.databinding.ActivityLoginBinding
 import com.example.bubbel.viewmodel.LoginViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginView:AppCompatActivity() {
+class LoginFragment : Fragment() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private var _binding: ActivityLoginBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel: LoginViewModel by viewModels()
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        //Retrieve username and password from login input
-        val username: String = binding.usernameInputField.text.toString()
-        val password: String = binding.passwordInputField.text.toString()
-        binding.loginButton.setOnClickListener{
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = ActivityLoginBinding.inflate(inflater, container, false)
+
+        // Retrieve username and password from login input
+        binding.loginButton.setOnClickListener {
+            val username = binding.usernameInputField.text.toString()
+            val password = binding.passwordInputField.text.toString()
+
             CoroutineScope(Dispatchers.Main).launch {
-                viewModel.submitLogIn(username, password,)
+                viewModel.submitLogIn(username, password)
                 println("success")
             }
         }
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
