@@ -1,18 +1,12 @@
 package com.example.bubbel.viewmodel
 
+import InCreateUser
 import androidx.lifecycle.ViewModel
-<<<<<<< Updated upstream
 import bubbelApiCreateUser
-import com.example.bubbel.model.FetchErrorException
-import com.example.bubbel.model.InCreateUser
-import kotlinx.serialization.SerializationException
-
-=======
-
 import kotlinx.serialization.SerializationException
 import FetchErrorException
 import bubbelApiCreateUser
->>>>>>> Stashed changes
+import FetchErrorException
 
 
 class SignUpViewModel: ViewModel() {
@@ -44,3 +38,4 @@ class SignUpViewModel: ViewModel() {
             }
         }
 }
+

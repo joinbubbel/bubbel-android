@@ -97,6 +97,6 @@ dependencies {
     implementation 'androidx.compose.material:material-icons-core'
     implementation 'androidx.compose.material:material-icons-extended'
     implementation 'androidx.fragment:fragment-ktx:1.6.0'
-    implementation("androidx.navigation:navigation-fragment-ktx")
-    implementation("androidx.navigation:navigation-ui-ktx")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
 }
