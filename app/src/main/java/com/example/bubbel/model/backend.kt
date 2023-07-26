@@ -212,7 +212,7 @@ enum class IndigoType(val value: String) {
 
 val BUBBEL_BATH_DEV = "https://bubbel-bath.onrender.com"
 
-suspend fun bubbelApiCreateUser(request: InCreateUser): ResCreateUser = withContext(Dispatchers.IO) {
+suspend fun bubbelApiCreateUser(request: com.example.bubbel.model.InCreateUser): ResCreateUser = withContext(Dispatchers.IO) {
         val encoder = Json { ignoreUnknownKeys = true }
         val json = encoder.encodeToString(request)
         val url = URL("$BUBBEL_BATH_DEV/api/create_user")
