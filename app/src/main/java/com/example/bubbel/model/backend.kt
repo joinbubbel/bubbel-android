@@ -208,33 +208,38 @@ enum class IndigoType(val value: String) {
 
 val BUBBEL_BATH_DEV = "https://bubbel-bath.onrender.com"
 
-class FetchErrorException(message: String) : Exception(message)
-suspend fun bubbelApiCreateUser(request: InCreateUser): ResCreateUser = withContext(Dispatchers.IO) {
-        val encoder = Json { ignoreUnknownKeys = true }
-        val json = encoder.encodeToString(request)
-        val url = URL("$BUBBEL_BATH_DEV/api/create_user")
-        val urlConnection = url.openConnection() as HttpURLConnection
-        urlConnection.requestMethod = "POST"
-        urlConnection.setRequestProperty("Content-Type", "application/json")
-        urlConnection.doOutput = true
-        urlConnection.outputStream.use { outputStream ->
-            outputStream.write(json.toByteArray())
+suspend fun bubbelApiCreateUser(request: InCreateUser): Unit = withContext(Dispatchers.IO) {
+    class FetchErrorException(message: String) : Exception(message)
+
+    suspend fun bubbelApiCreateUser(request: InCreateUser): ResCreateUser =
+        withContext(Dispatchers.IO) {
+            val encoder = Json { ignoreUnknownKeys = true }
+            val json = encoder.encodeToString(request)
+            val url = URL("$BUBBEL_BATH_DEV/api/create_user")
+            val urlConnection = url.openConnection() as HttpURLConnection
+            urlConnection.requestMethod = "POST"
+            urlConnection.setRequestProperty("Content-Type", "application/json")
+            urlConnection.doOutput = true
+            urlConnection.outputStream.use { outputStream ->
+                outputStream.write(json.toByteArray())
+            }
+
+            val responseCode = urlConnection.responseCode
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                val responseString =
+                    urlConnection.inputStream.bufferedReader().use { it.readText() }
+                val decoder = Json { ignoreUnknownKeys = true }
+                try {
+                    decoder.decodeFromString(responseString)
+                } catch (ex: SerializationException) {
+                    throw Exception("Error decoding response: ${ex.message}")
+                }
+            } else {
+                throw Exception("Error fetching data. Response code: $responseCode")
+            }
         }
 
-        val responseCode = urlConnection.responseCode
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            val responseString = urlConnection.inputStream.bufferedReader().use { it.readText() }
-            val decoder = Json { ignoreUnknownKeys = true }
-            try {
-                decoder.decodeFromString(responseString)
-            } catch (ex: SerializationException) {
-                throw Exception("Error decoding response: ${ex.message}")
-            }
-        } else {
-            throw Exception("Error fetching data. Response code: $responseCode")
-        }
-    }
-suspend fun bubbelApiAuthUser(request: InAuthUser): ResAuthUser = withContext(Dispatchers.IO) {
+    suspend fun bubbelApiAuthUser(request: InAuthUser): ResAuthUser = withContext(Dispatchers.IO) {
         val encoder = Json { ignoreUnknownKeys = true }
         val json = encoder.encodeToString(request)
         val url = URL("$BUBBEL_BATH_DEV/api/auth_user")
@@ -259,129 +264,144 @@ suspend fun bubbelApiAuthUser(request: InAuthUser): ResAuthUser = withContext(Di
             throw Exception("Error fetching data. Response code: $responseCode")
         }
     }
-suspend fun bubbelApiDeauthUser(request: InDeauthUser): ResDeauthUser = withContext(Dispatchers.IO) {
-        val encoder = Json { ignoreUnknownKeys = true }
-        val json = encoder.encodeToString(request)
-        val url = URL("$BUBBEL_BATH_DEV/api/deauth_user")
-        val urlConnection = url.openConnection() as HttpURLConnection
-        urlConnection.requestMethod = "POST"
-        urlConnection.setRequestProperty("Content-Type", "application/json")
-        urlConnection.doOutput = true
-        urlConnection.outputStream.use { outputStream ->
-            outputStream.write(json.toByteArray())
-        }
 
-        val responseCode = urlConnection.responseCode
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            val responseString = urlConnection.inputStream.bufferedReader().use { it.readText() }
-            val decoder = Json { ignoreUnknownKeys = true }
-            try {
-                decoder.decodeFromString(responseString)
-            } catch (ex: SerializationException) {
-                throw Exception("Error decoding response: ${ex.message}")
+    suspend fun bubbelApiDeauthUser(request: InDeauthUser): ResDeauthUser =
+        withContext(Dispatchers.IO) {
+            val encoder = Json { ignoreUnknownKeys = true }
+            val json = encoder.encodeToString(request)
+            val url = URL("$BUBBEL_BATH_DEV/api/deauth_user")
+            val urlConnection = url.openConnection() as HttpURLConnection
+            urlConnection.requestMethod = "POST"
+            urlConnection.setRequestProperty("Content-Type", "application/json")
+            urlConnection.doOutput = true
+            urlConnection.outputStream.use { outputStream ->
+                outputStream.write(json.toByteArray())
             }
-        } else {
-            throw Exception("Error fetching data. Response code: $responseCode")
-        }
-    }
-suspend fun bubbelApiVerifyAccount(request: InVerifyAccount): ResVerifyAccount = withContext(Dispatchers.IO) {
-        val encoder = Json { ignoreUnknownKeys = true }
-        val json = encoder.encodeToString(request)
-        val url = URL("$BUBBEL_BATH_DEV/api/verify_account")
-        val urlConnection = url.openConnection() as HttpURLConnection
-        urlConnection.requestMethod = "POST"
-        urlConnection.setRequestProperty("Content-Type", "application/json")
-        urlConnection.doOutput = true
-        urlConnection.outputStream.use { outputStream ->
-            outputStream.write(json.toByteArray())
-        }
 
-        val responseCode = urlConnection.responseCode
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            val responseString = urlConnection.inputStream.bufferedReader().use { it.readText() }
-            val decoder = Json { ignoreUnknownKeys = true }
-            try {
-                decoder.decodeFromString(responseString)
-            } catch (ex: SerializationException) {
-                throw Exception("Error decoding response: ${ex.message}")
+            val responseCode = urlConnection.responseCode
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                val responseString =
+                    urlConnection.inputStream.bufferedReader().use { it.readText() }
+                val decoder = Json { ignoreUnknownKeys = true }
+                try {
+                    decoder.decodeFromString(responseString)
+                } catch (ex: SerializationException) {
+                    throw Exception("Error decoding response: ${ex.message}")
+                }
+            } else {
+                throw Exception("Error fetching data. Response code: $responseCode")
             }
-        } else {
-            throw Exception("Error fetching data. Response code: $responseCode")
-        }
-    }
-suspend fun bubbelApiSendVerify(request: InSendVerify): ResSendVerify = withContext(Dispatchers.IO) {
-        val encoder = Json { ignoreUnknownKeys = true }
-        val json = encoder.encodeToString(request)
-        val url = URL("$BUBBEL_BATH_DEV/api/send_verify")
-        val urlConnection = url.openConnection() as HttpURLConnection
-        urlConnection.requestMethod = "POST"
-        urlConnection.setRequestProperty("Content-Type", "application/json")
-        urlConnection.doOutput = true
-        urlConnection.outputStream.use { outputStream ->
-            outputStream.write(json.toByteArray())
         }
 
-        val responseCode = urlConnection.responseCode
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            val responseString = urlConnection.inputStream.bufferedReader().use { it.readText() }
-            val decoder = Json { ignoreUnknownKeys = true }
-            try {
-                decoder.decodeFromString(responseString)
-            } catch (ex: SerializationException) {
-                throw Exception("Error decoding response: ${ex.message}")
+    suspend fun bubbelApiVerifyAccount(request: InVerifyAccount): ResVerifyAccount =
+        withContext(Dispatchers.IO) {
+            val encoder = Json { ignoreUnknownKeys = true }
+            val json = encoder.encodeToString(request)
+            val url = URL("$BUBBEL_BATH_DEV/api/verify_account")
+            val urlConnection = url.openConnection() as HttpURLConnection
+            urlConnection.requestMethod = "POST"
+            urlConnection.setRequestProperty("Content-Type", "application/json")
+            urlConnection.doOutput = true
+            urlConnection.outputStream.use { outputStream ->
+                outputStream.write(json.toByteArray())
             }
-        } else {
-            throw Exception("Error fetching data. Response code: $responseCode")
-        }
-    }
-suspend fun bubbelApiSetUserProfile(request: InSetUserProfile): ResSetUserProfile = withContext(Dispatchers.IO) {
-        val encoder = Json { ignoreUnknownKeys = true }
-        val json = encoder.encodeToString(request)
-        val url = URL("$BUBBEL_BATH_DEV/api/set_user_profile")
-        val urlConnection = url.openConnection() as HttpURLConnection
-        urlConnection.requestMethod = "POST"
-        urlConnection.setRequestProperty("Content-Type", "application/json")
-        urlConnection.doOutput = true
-        urlConnection.outputStream.use { outputStream ->
-            outputStream.write(json.toByteArray())
-        }
 
-        val responseCode = urlConnection.responseCode
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            val responseString = urlConnection.inputStream.bufferedReader().use { it.readText() }
-            val decoder = Json { ignoreUnknownKeys = true }
-            try {
-                decoder.decodeFromString(responseString)
-            } catch (ex: SerializationException) {
-                throw Exception("Error decoding response: ${ex.message}")
+            val responseCode = urlConnection.responseCode
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                val responseString =
+                    urlConnection.inputStream.bufferedReader().use { it.readText() }
+                val decoder = Json { ignoreUnknownKeys = true }
+                try {
+                    decoder.decodeFromString(responseString)
+                } catch (ex: SerializationException) {
+                    throw Exception("Error decoding response: ${ex.message}")
+                }
+            } else {
+                throw Exception("Error fetching data. Response code: $responseCode")
             }
-        } else {
-            throw Exception("Error fetching data. Response code: $responseCode")
-        }
-    }
-suspend fun bubbelApiDeleteUser(request: InDeleteUser): ResDeleteUser = withContext(Dispatchers.IO) {
-        val encoder = Json { ignoreUnknownKeys = true }
-        val json = encoder.encodeToString(request)
-        val url = URL("$BUBBEL_BATH_DEV/api/delete_user")
-        val urlConnection = url.openConnection() as HttpURLConnection
-        urlConnection.requestMethod = "POST"
-        urlConnection.setRequestProperty("Content-Type", "application/json")
-        urlConnection.doOutput = true
-        urlConnection.outputStream.use { outputStream ->
-            outputStream.write(json.toByteArray())
         }
 
-        val responseCode = urlConnection.responseCode
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            val responseString = urlConnection.inputStream.bufferedReader().use { it.readText() }
-            val decoder = Json { ignoreUnknownKeys = true }
-            try {
-                decoder.decodeFromString(responseString)
-            } catch (ex: SerializationException) {
-                throw Exception("Error decoding response: ${ex.message}")
+    suspend fun bubbelApiSendVerify(request: InSendVerify): ResSendVerify =
+        withContext(Dispatchers.IO) {
+            val encoder = Json { ignoreUnknownKeys = true }
+            val json = encoder.encodeToString(request)
+            val url = URL("$BUBBEL_BATH_DEV/api/send_verify")
+            val urlConnection = url.openConnection() as HttpURLConnection
+            urlConnection.requestMethod = "POST"
+            urlConnection.setRequestProperty("Content-Type", "application/json")
+            urlConnection.doOutput = true
+            urlConnection.outputStream.use { outputStream ->
+                outputStream.write(json.toByteArray())
             }
-        } else {
-            throw Exception("Error fetching data. Response code: $responseCode")
-        }
-    }
 
+            val responseCode = urlConnection.responseCode
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                val responseString =
+                    urlConnection.inputStream.bufferedReader().use { it.readText() }
+                val decoder = Json { ignoreUnknownKeys = true }
+                try {
+                    decoder.decodeFromString(responseString)
+                } catch (ex: SerializationException) {
+                    throw Exception("Error decoding response: ${ex.message}")
+                }
+            } else {
+                throw Exception("Error fetching data. Response code: $responseCode")
+            }
+        }
+
+    suspend fun bubbelApiSetUserProfile(request: InSetUserProfile): ResSetUserProfile =
+        withContext(Dispatchers.IO) {
+            val encoder = Json { ignoreUnknownKeys = true }
+            val json = encoder.encodeToString(request)
+            val url = URL("$BUBBEL_BATH_DEV/api/set_user_profile")
+            val urlConnection = url.openConnection() as HttpURLConnection
+            urlConnection.requestMethod = "POST"
+            urlConnection.setRequestProperty("Content-Type", "application/json")
+            urlConnection.doOutput = true
+            urlConnection.outputStream.use { outputStream ->
+                outputStream.write(json.toByteArray())
+            }
+
+            val responseCode = urlConnection.responseCode
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                val responseString =
+                    urlConnection.inputStream.bufferedReader().use { it.readText() }
+                val decoder = Json { ignoreUnknownKeys = true }
+                try {
+                    decoder.decodeFromString(responseString)
+                } catch (ex: SerializationException) {
+                    throw Exception("Error decoding response: ${ex.message}")
+                }
+            } else {
+                throw Exception("Error fetching data. Response code: $responseCode")
+            }
+        }
+
+    suspend fun bubbelApiDeleteUser(request: InDeleteUser): ResDeleteUser =
+        withContext(Dispatchers.IO) {
+            val encoder = Json { ignoreUnknownKeys = true }
+            val json = encoder.encodeToString(request)
+            val url = URL("$BUBBEL_BATH_DEV/api/delete_user")
+            val urlConnection = url.openConnection() as HttpURLConnection
+            urlConnection.requestMethod = "POST"
+            urlConnection.setRequestProperty("Content-Type", "application/json")
+            urlConnection.doOutput = true
+            urlConnection.outputStream.use { outputStream ->
+                outputStream.write(json.toByteArray())
+            }
+
+            val responseCode = urlConnection.responseCode
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                val responseString =
+                    urlConnection.inputStream.bufferedReader().use { it.readText() }
+                val decoder = Json { ignoreUnknownKeys = true }
+                try {
+                    decoder.decodeFromString(responseString)
+                } catch (ex: SerializationException) {
+                    throw Exception("Error decoding response: ${ex.message}")
+                }
+            } else {
+                throw Exception("Error fetching data. Response code: $responseCode")
+            }
+        }
+}

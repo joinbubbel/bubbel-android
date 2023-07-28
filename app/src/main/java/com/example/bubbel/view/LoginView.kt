@@ -1,46 +1,55 @@
 package com.example.bubbel.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.example.bubbel.databinding.ActivityLoginBinding
 import com.example.bubbel.viewmodel.LoginViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginFragment : Fragment() {
+class LoginView:AppCompatActivity() {
 
-    private var _binding: ActivityLoginBinding? = null
-    private val binding get() = _binding!!
-
+    private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = ActivityLoginBinding.inflate(inflater, container, false)
+        viewModel._reAuthUser.observe(this, Observer { reAuthUser ->
+            if (reAuthUser != null) {
+                binding.progressCircular.hide()
+                showDialog("Successful!", "Login Successful!")
+//                startActivity(Intent(this, MainActivity::class.java))
+            }
+        })
 
-        // Retrieve username and password from login input
-        binding.loginButton.setOnClickListener {
-            val username = binding.usernameInputField.text.toString()
-            val password = binding.passwordInputField.text.toString()
+        viewModel._error.observe(this, Observer { errorMsg ->
+            binding.progressCircular.hide()
+            showDialog("Error", errorMsg.toString())
+        })
 
+        binding.loginButton.setOnClickListener{
             CoroutineScope(Dispatchers.Main).launch {
-                viewModel.submitLogIn(username, password)
-                println("success")
+                binding.progressCircular.visibility = View.VISIBLE
+                binding.progressCircular.show()
+                viewModel.submitLogIn(binding.edtUserName.text.toString(),binding.edtPsw.text.toString())
             }
         }
-        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun showDialog(title: String, message: String) {
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .create()
+
+        alertDialog.show()
     }
 }

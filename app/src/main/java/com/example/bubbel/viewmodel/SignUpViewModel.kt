@@ -4,8 +4,7 @@ import InCreateUser
 import androidx.lifecycle.ViewModel
 import bubbelApiCreateUser
 import kotlinx.serialization.SerializationException
-import FetchErrorException
-import bubbelApiCreateUser
+import com.example.bubbel.model.FetchErrorException
 
 
 class SignUpViewModel: ViewModel() {
