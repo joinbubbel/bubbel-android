@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.example.bubbel.view.SplashFragment"
-        tools:layout="@layout/activity_splash" >
+        android:name="com.example.bubbel.view.onboarding.SplashFragment"
+        tools:layout="@layout/splash_screen" >
         <action
             android:id="@+id/action_splashFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -16,14 +16,14 @@
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_splashFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_splashScreenFragment_to_appView"
+            app:destination="@id/appView" />
     </fragment>
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.bubbel.view.SignUpFragment"
-        tools:layout="@layout/activity_signup" >
+        android:name="com.example.bubbel.view.onboarding.SignUpFragment"
+        tools:layout="@layout/signup_screen" >
         <action
             android:id="@+id/action_signUpFragment_to_verificationFragment"
             app:destination="@id/verificationFragment" />
@@ -31,17 +31,17 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.bubbel.view.LoginFragment"
-        tools:layout="@layout/activity_login"/>
+        android:name="com.example.bubbel.view.onboarding.LoginFragment"
+        tools:layout="@layout/login_screen"/>
 
     <fragment
         android:id="@+id/verificationFragment"
-        android:name="com.example.bubbel.view.LoginFragment"
-        tools:layout="@layout/verification"/>
-
+        android:name="com.example.bubbel.view.onboarding.VerificationView"
+        tools:layout="@layout/verification_screen"/>
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.bubbel.view.HomeFragment"
-        tools:layout="@layout/activity_home"/>
+        android:id="@+id/appView"
+        android:name="com.example.bubbel.view.app.AppView"
+        android:label="AppView" />
+
 </navigation>
 

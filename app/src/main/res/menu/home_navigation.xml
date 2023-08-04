@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/home_icon"/>
+    <item
+        android:id="@+id/clubs"
+        android:title="Clubs"
+        android:icon="@drawable/club_icon"/>
+    <item
+        android:id="@+id/post"
+        android:title="Posts"
+        android:icon="@drawable/posts_icon"/>
+    <item
+        android:id="@+id/messages"
+        android:title="Message"
+        android:icon="@drawable/message_icon"/>
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/profile_icon"/>
+</menu>

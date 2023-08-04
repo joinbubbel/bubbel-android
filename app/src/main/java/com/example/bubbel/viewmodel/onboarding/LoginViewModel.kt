@@ -1,4 +1,4 @@
-package com.example.bubbel.viewmodel
+package com.example.bubbel.viewmodel.onboarding
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

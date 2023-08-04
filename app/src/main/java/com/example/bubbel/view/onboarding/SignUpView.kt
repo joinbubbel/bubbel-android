@@ -1,33 +1,31 @@
-package com.example.bubbel.view
+package com.example.bubbel.view.onboarding
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
-import com.example.bubbel.databinding.ActivitySignupBinding
-import com.example.bubbel.viewmodel.SignUpViewModel
+import androidx.fragment.app.viewModels
+import com.example.bubbel.databinding.SignupScreenBinding
+import com.example.bubbel.viewmodel.onboarding.SignUpViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SignUpFragment : Fragment() {
-    private lateinit var binding: ActivitySignupBinding
-    private lateinit var viewModel: SignUpViewModel
+    private lateinit var binding: SignupScreenBinding
+    private val viewModel: SignUpViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = ActivitySignupBinding.inflate(inflater, container, false)
+        binding = SignupScreenBinding.inflate(inflater, container, false)
         setupViews()
         return binding.root
     }
-
 
     private fun setupViews() {
         binding.signUpButton.setOnClickListener {
@@ -44,12 +42,8 @@ class SignUpFragment : Fragment() {
         }
         binding.signUpLink.setOnClickListener {
             print("ok")
-            val saveIntent = Intent(requireContext(), LoginView::class.java)
+            val saveIntent = Intent(requireContext(), LoginFragment::class.java)
             startActivity(saveIntent)
         }
-    }
-
-    fun setViewModel(viewModel: SignUpViewModel) {
-        this.viewModel = viewModel
     }
 }

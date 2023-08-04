@@ -8,4 +8,6 @@
     <string name="title_activity_screen_view">ScreenView</string>
     <string name="title_activity_login_view">LoginView</string>
     <string name="title_activity_dynamic_widget_sizes">DynamicWidgetSizes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
