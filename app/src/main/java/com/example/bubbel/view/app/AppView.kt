@@ -26,10 +26,23 @@ class AppView : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize your HomeScreenFragment
-        val homeScreenFragment = HomeScreenView() // Replace with your actual HomeScreenFragment class
+        // Set up initial fragment
+        replaceFragment(HomeView()) // Initial Fragment
 
-        // Use the child FragmentManager to replace your FrameLayout with your Fragment
-        childFragmentManager.beginTransaction().replace(R.id.flFragment, homeScreenFragment).commit()
+        // Set the onNavigationItemSelectedListener for the BottomNavigationView
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> replaceFragment(HomeView())
+                R.id.clubs -> replaceFragment(ClubView())
+                R.id.messages -> replaceFragment(MessageView())
+                R.id.profile -> replaceFragment(ProfileView())
+                else -> false
+            }
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment): Boolean {
+        childFragmentManager.beginTransaction().replace(R.id.flFragment, fragment).commit()
+        return true
     }
 }
