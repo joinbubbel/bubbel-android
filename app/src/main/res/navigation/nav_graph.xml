@@ -32,7 +32,11 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.bubbel.view.onboarding.LoginFragment"
-        tools:layout="@layout/login_screen"/>
+        tools:layout="@layout/login_screen">
+        <action
+            android:id="@+id/action_loginFragment_to_appView"
+            app:destination="@id/appView" />
+    </fragment>
 
     <fragment
         android:id="@+id/verificationFragment"

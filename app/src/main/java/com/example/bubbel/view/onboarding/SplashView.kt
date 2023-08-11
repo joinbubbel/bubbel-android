@@ -25,12 +25,11 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashScreenFragment_to_appView)
-                                                    // when{
-                // viewModel.isFirstTime() -> findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
-                // viewModel.isLoggedIn() -> findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
-                // else -> findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-            //}
+            when{
+                 viewModel.isFirstTime() -> findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
+                 viewModel.isLoggedIn() -> findNavController().navigate(R.id.action_splashScreenFragment_to_appView)
+                 else -> findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+            }
         }, DELAY_MILLIS)
     }
 

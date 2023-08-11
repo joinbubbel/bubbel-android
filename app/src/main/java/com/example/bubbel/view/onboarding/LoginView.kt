@@ -1,6 +1,8 @@
 package com.example.bubbel.view.onboarding
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.example.bubbel.R
 import com.example.bubbel.databinding.LoginScreenBinding
 import com.example.bubbel.viewmodel.onboarding.LoginViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -31,6 +35,8 @@ class LoginFragment : Fragment() {
             if (reAuthUser != null) {
                 binding.progressCircular.hide()
                 showDialog("Successful!", "Login Successful!")
+
+                findNavController().navigate(R.id.action_loginFragment_to_appView)
             }
         })
 

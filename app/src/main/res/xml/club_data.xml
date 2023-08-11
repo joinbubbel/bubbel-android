@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <clubs>
+        <club>
+            <image>Image</image>
+            <title>Dallas Cowboys</title>
+            <isVerified>true</isVerified>
+            <membersOnline>1.2k</membersOnline>
+        </club>
+    </clubs>
+</PreferenceScreen>
