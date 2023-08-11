@@ -21,12 +21,12 @@ data class ResDeleteClub (
  */
 @Serializable
 data class DeleteClubError (
-    val type: Type,
+    val type: ResDeleteClubErrorType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class Type(val value: String) {
+enum class ResDeleteClubErrorType(val value: String) {
     @SerialName("ClubNotFound") ClubNotFound("ClubNotFound"),
     @SerialName("Internal") Internal("Internal"),
     @SerialName("NoAuth") NoAuth("NoAuth"),

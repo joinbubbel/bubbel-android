@@ -18,12 +18,12 @@ data class ResGetFriendConnections (
 
 @Serializable
 data class GetFriendConnectionsError (
-    val type: Type,
+    val type: ResGetFriendConnectionsErrorType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class Type(val value: String) {
+enum class ResGetFriendConnectionsErrorType(val value: String) {
     @SerialName("Internal") Internal("Internal"),
     @SerialName("NoAuth") NoAuth("NoAuth");
 }

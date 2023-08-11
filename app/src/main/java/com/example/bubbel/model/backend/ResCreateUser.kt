@@ -29,12 +29,12 @@ data class ResCreateUser (
  */
 @Serializable
 data class CreateUserError (
-    val type: Type,
+    val type: ResCreateUserErrorType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class Type(val value: String) {
+enum class ResCreateUserErrorType(val value: String) {
     @SerialName("EmailOrUsernametaken") EmailOrUsernametaken("EmailOrUsernametaken"),
     @SerialName("Internal") Internal("Internal"),
     @SerialName("InvalidEmail") InvalidEmail("InvalidEmail"),
