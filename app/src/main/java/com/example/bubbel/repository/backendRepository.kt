@@ -64,7 +64,7 @@ object RetrofitClient {
             .baseUrl("https://api.joinbubbel.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(loginService::class.java)
+            .create(backendService::class.java)
     }
 }
 
