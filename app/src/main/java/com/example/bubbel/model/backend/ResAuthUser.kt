@@ -21,12 +21,12 @@ data class ResAuthUser (
  */
 @Serializable
 data class AuthUserError (
-    val type: AuthUserType,
+    val type: ResAuthUserErrorType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class AuthUserType(val value: String) {
+enum class ResAuthUserErrorType(val value: String) {
     @SerialName("Internal") Internal("Internal"),
     @SerialName("InvalidCredentials") InvalidCredentials("InvalidCredentials"),
     @SerialName("InvalidPasswordCryto") InvalidPasswordCryto("InvalidPasswordCryto"),

@@ -18,12 +18,12 @@ data class ResDeleteUser (
 
 @Serializable
 data class DeleteUserError (
-    val type: DeleteUserType,
+    val type: ResDeleteUserErrorType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class DeleteUserType(val value: String) {
+enum class ResDeleteUserErrorType(val value: String) {
     @SerialName("Internal") Internal("Internal"),
     @SerialName("NoAuth") NoAuth("NoAuth");
 }

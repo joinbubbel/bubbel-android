@@ -21,12 +21,12 @@ data class ResSetClubProfile (
  */
 @Serializable
 data class SetClubProfileError (
-    val type: SetClubProfileType,
+    val type: ResSetClubProfileErrorType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class SetClubProfileType(val value: String) {
+enum class ResSetClubProfileErrorType(val value: String) {
     @SerialName("ClubNotFound") ClubNotFound("ClubNotFound"),
     @SerialName("Internal") Internal("Internal"),
     @SerialName("NoAuth") NoAuth("NoAuth"),
