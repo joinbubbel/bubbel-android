@@ -31,5 +31,6 @@ enum class ResSetClubProfileErrorType(val value: String) {
     @SerialName("Internal") Internal("Internal"),
     @SerialName("NoAuth") NoAuth("NoAuth"),
     @SerialName("NoAuthOwner") NoAuthOwner("NoAuthOwner"),
+    @SerialName("SettingNameNotSupportedYet") SettingNameNotSupportedYet("SettingNameNotSupportedYet"),
     @SerialName("SettingOwnerNotSupportedYet") SettingOwnerNotSupportedYet("SettingOwnerNotSupportedYet");
 }
