@@ -23,7 +23,7 @@ data class GetUserClubsError (
 )
 
 @Serializable
-enum class GetUserClubsType(val value: String) {
+enum class ResGetUserClubsErrorType(val value: String) {
     @SerialName("Internal") Internal("Internal");
 }
 

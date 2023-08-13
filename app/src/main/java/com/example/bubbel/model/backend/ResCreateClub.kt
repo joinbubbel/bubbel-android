@@ -18,12 +18,12 @@ data class ResCreateClub (
 
 @Serializable
 data class CreateClubError (
-    val type: CreateClubType,
+    val type: ResCreateClubErrorType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class CreateClubType(val value: String) {
+enum class ResCreateClubErrorType(val value: String) {
     @SerialName("Internal") Internal("Internal"),
     @SerialName("NoAuth") NoAuth("NoAuth");
 }

@@ -50,6 +50,10 @@ interface backendService {
     fun getClubMembers(@Body userData: InGetClubMembers): Call<ResGetClubMembers>
     @POST("/api/get_user_clubs")
     fun getUserClubs(@Body userData: InGetUserClubs): Call<ResGetUserClubs>
+    @POST("/api/regex_search_clubs")
+    fun regexSearchClubs(@Body userData: InRegexSearchClubs): Call<ResRegexSearchClubs>
+    @POST("/api/regex_search_users")
+    fun regexSearchUsers(@Body userData: InRegexSearchUsers): Call<ResRegexSearchUsers>
 }
 
 //  This was originally went in "RetrofitClient.kt"
@@ -383,6 +387,38 @@ class BackendRepository {
             }
 
             override fun onFailure(call: Call<ResGetUserClubs>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun regexSearchClubs(request: InRegexSearchClubs,  onSuccess: (ResRegexSearchClubs?) -> Unit, onError: (String) -> Unit){
+        backendService.regexSearchClubs(request).enqueue(object : Callback<ResRegexSearchClubs> {
+            override fun onResponse(call: Call<ResRegexSearchClubs>, response: Response<ResRegexSearchClubs>) {
+                if (response.isSuccessful) {
+                    val out: ResRegexSearchClubs? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResRegexSearchClubs>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun regexSearchUsers(request: InRegexSearchUsers,  onSuccess: (ResRegexSearchUsers?) -> Unit, onError: (String) -> Unit){
+        backendService.regexSearchUsers(request).enqueue(object : Callback<ResRegexSearchUsers> {
+            override fun onResponse(call: Call<ResRegexSearchUsers>, response: Response<ResRegexSearchUsers>) {
+                if (response.isSuccessful) {
+                    val out: ResRegexSearchUsers? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResRegexSearchUsers>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }
         })

@@ -18,12 +18,12 @@ data class ResSetUserProfile (
 
 @Serializable
 data class SetUserProfileError (
-    val type: SetUserProfileType,
+    val type: ResSetUserProfileErrorType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class SetUserProfileType(val value: String) {
+enum class ResSetUserProfileErrorType(val value: String) {
     @SerialName("Internal") Internal("Internal"),
     @SerialName("NoAuth") NoAuth("NoAuth");
 }

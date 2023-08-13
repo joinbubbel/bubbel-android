@@ -18,12 +18,12 @@ data class ResRemoveFriend (
 
 @Serializable
 data class RemoveFriendError (
-    val type: RemoveFriendType,
+    val type: ResRemoveFriendErrorType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class RemoveFriendType(val value: String) {
+enum class ResRemoveFriendErrorType(val value: String) {
     @SerialName("Internal") Internal("Internal"),
     @SerialName("NoAuth") NoAuth("NoAuth");
 }
