@@ -18,12 +18,12 @@ data class ResUnjoinClub (
 
 @Serializable
 data class UnjoinClubError (
-    val type: Type,
+    val type: UnjoinClubType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class Type(val value: String) {
+enum class UnjoinClubType(val value: String) {
     @SerialName("CannotUnjoinAsOwner") CannotUnjoinAsOwner("CannotUnjoinAsOwner"),
     @SerialName("ClubNotFound") ClubNotFound("ClubNotFound"),
     @SerialName("Internal") Internal("Internal"),

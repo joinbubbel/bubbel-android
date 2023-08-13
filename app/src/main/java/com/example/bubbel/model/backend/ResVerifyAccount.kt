@@ -21,12 +21,12 @@ data class ResVerifyAccount (
  */
 @Serializable
 data class VerifyAccountError (
-    val type: Type,
+    val type: VerifyAccountType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class Type(val value: String) {
+enum class VerifyAccountType(val value: String) {
     @SerialName("CodeTimedOutOrAlreadyVerifiedOrInvalidCode") CodeTimedOutOrAlreadyVerifiedOrInvalidCode("CodeTimedOutOrAlreadyVerifiedOrInvalidCode"),
     @SerialName("Internal") Internal("Internal");
 }

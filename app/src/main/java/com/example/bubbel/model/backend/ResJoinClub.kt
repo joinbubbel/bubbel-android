@@ -18,12 +18,12 @@ data class ResJoinClub (
 
 @Serializable
 data class JoinClubError (
-    val type: Type,
+    val type: JoinClubType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class Type(val value: String) {
+enum class JoinClubType(val value: String) {
     @SerialName("AlreadyJoined") AlreadyJoined("AlreadyJoined"),
     @SerialName("Internal") Internal("Internal"),
     @SerialName("NoAuth") NoAuth("NoAuth");

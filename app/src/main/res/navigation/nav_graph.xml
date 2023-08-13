@@ -41,7 +41,14 @@
     <fragment
         android:id="@+id/verificationFragment"
         android:name="com.example.bubbel.view.onboarding.VerificationView"
-        tools:layout="@layout/verification_screen"/>
+        tools:layout="@layout/verification_screen">
+        <action
+            android:id="@+id/action_verificationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_verificationFragment_to_appView"
+            app:destination="@id/appView" />
+    </fragment>
     <fragment
         android:id="@+id/appView"
         android:name="com.example.bubbel.view.app.AppView"

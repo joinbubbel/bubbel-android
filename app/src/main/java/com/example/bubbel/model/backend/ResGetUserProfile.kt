@@ -18,12 +18,12 @@ data class ResGetUserProfile (
 
 @Serializable
 data class GetUserProfileError (
-    val type: Type,
+    val type: GetUserProfileType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class Type(val value: String) {
+enum class GetUserProfileType(val value: String) {
     @SerialName("Internal") Internal("Internal"),
     @SerialName("NoAuth") NoAuth("NoAuth"),
     @SerialName("UserNotFound") UserNotFound("UserNotFound");

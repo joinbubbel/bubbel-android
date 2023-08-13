@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.bubbel.R
 import com.example.bubbel.databinding.SignupScreenBinding
 import com.example.bubbel.viewmodel.onboarding.SignUpViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -38,9 +41,11 @@ class SignUpFragment : Fragment() {
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel.submitSignUp(username, email, password, confirmPassword)
                 println("success")
+
+                findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
             }
         }
-        binding.signUpLink.setOnClickListener {
+        binding.loginButton.setOnClickListener {
             print("ok")
             val saveIntent = Intent(requireContext(), LoginFragment::class.java)
             startActivity(saveIntent)

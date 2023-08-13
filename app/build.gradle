@@ -87,6 +87,7 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.6.0'
     implementation("androidx.navigation:navigation-fragment-ktx:${nav_version}")
     implementation("androidx.navigation:navigation-ui-ktx:${nav_version}")
+    implementation 'com.google.code.gson:gson'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core' // replace with the latest version
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android' // replace with the latest version

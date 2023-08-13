@@ -1,7 +1,7 @@
 // To parse the JSON, install kotlin's serialization plugin and do:
 //
 // val json         = Json { allowStructuredMapKeys = true }
-// val inSendVerify = json.parse(InSendVerify.serializer(), jsonString)
+// val inCreateUser = json.parse(InCreateUser.serializer(), jsonString)
 
 package com.example.bubbel.model.backend
 
@@ -11,7 +11,6 @@ import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 @Serializable
-data class InSendVerify(
-    @SerialName("user_id")
-    val userID: ResCreateUser?
+data class UserId (
+    val userId: Long,
 )

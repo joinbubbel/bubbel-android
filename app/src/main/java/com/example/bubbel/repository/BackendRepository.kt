@@ -8,11 +8,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.SerializationException
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 interface backendService {
     @POST("/api/create_user")
@@ -64,7 +59,7 @@ object RetrofitClient {
             .baseUrl("https://api.joinbubbel.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(loginService::class.java)
+            .create(backendService::class.java)
     }
 }
 
@@ -72,7 +67,7 @@ object RetrofitClient {
 class BackendRepository {
     private val backendService = RetrofitClient.api
 
-    suspend fun createUser(request: InCreateUser,  onSuccess: (ResCreateUser?) -> Unit, onError: (String) -> Unit){
+    suspend fun createUser(request: InCreateUser, onSuccess: (ResCreateUser?) -> Unit, onError: (String) -> Unit){
         backendService.createUser(request).enqueue(object : Callback<ResCreateUser> {
             override fun onResponse(call: Call<ResCreateUser>, response: Response<ResCreateUser>) {
                 if (response.isSuccessful) {

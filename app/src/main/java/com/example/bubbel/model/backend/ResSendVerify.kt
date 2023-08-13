@@ -21,12 +21,12 @@ data class ResSendVerify (
  */
 @Serializable
 data class SendVerifyError (
-    val type: Type,
+    val type: SendVerifyType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class Type(val value: String) {
+enum class SendVerifyType(val value: String) {
     @SerialName("Internal") Internal("Internal"),
     @SerialName("ResendTooSoon") ResendTooSoon("ResendTooSoon"),
     @SerialName("SendVerification") SendVerification("SendVerification"),

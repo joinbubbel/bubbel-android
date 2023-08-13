@@ -18,12 +18,12 @@ data class ResAddFriendConnection (
 
 @Serializable
 data class AddFriendConnectionError (
-    val type: Type,
+    val type: AddFriendConnectionType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class Type(val value: String) {
+enum class AddFriendConnectionType(val value: String) {
     @SerialName("AlreadyConnected") AlreadyConnected("AlreadyConnected"),
     @SerialName("CannotAddSelf") CannotAddSelf("CannotAddSelf"),
     @SerialName("Internal") Internal("Internal"),

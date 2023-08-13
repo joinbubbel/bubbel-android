@@ -18,12 +18,12 @@ data class ResGetClubProfile (
 
 @Serializable
 data class GetClubProfileError (
-    val type: Type,
+    val type: GetClubProfileType,
     val ierror: String? = null
 )
 
 @Serializable
-enum class Type(val value: String) {
+enum class GetClubProfileType(val value: String) {
     @SerialName("ClubNotFound") ClubNotFound("ClubNotFound"),
     @SerialName("Internal") Internal("Internal"),
     @SerialName("NoAuth") NoAuth("NoAuth");

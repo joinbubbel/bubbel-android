@@ -3,13 +3,13 @@ package com.example.bubbel.viewmodel.onboarding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.bubbel.model.InAuthUser
-import com.example.bubbel.model.ResAuthUser
-import com.example.bubbel.repository.UserRepository
+import com.example.bubbel.model.backend.InAuthUser
+import com.example.bubbel.model.backend.ResAuthUser
+import com.example.bubbel.repository.BackendRepository
 
 class LoginViewModel : ViewModel() {
 
-    private val userRepository = UserRepository()
+    private  val  backendRepository = BackendRepository()
 
     val _reAuthUser = MutableLiveData<ResAuthUser?>()
 
@@ -17,7 +17,8 @@ class LoginViewModel : ViewModel() {
     val error: LiveData<String> get() = _error
     suspend fun submitLogIn(username: String, password: String) {
 //        return userRepository.loginUserView(InAuthUser(username, password))
-        userRepository.loginUser(InAuthUser(username, password),
+        backendRepository.authUser(
+            InAuthUser(username, password),
             onSuccess = { resAuthUser ->
                 _reAuthUser.value = resAuthUser
                         },

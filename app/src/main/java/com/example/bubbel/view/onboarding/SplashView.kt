@@ -28,7 +28,7 @@ class SplashFragment : Fragment() {
             when{
                  viewModel.isFirstTime() -> findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
                  viewModel.isLoggedIn() -> findNavController().navigate(R.id.action_splashScreenFragment_to_appView)
-                 else -> findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                 else -> findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
             }
         }, DELAY_MILLIS)
     }

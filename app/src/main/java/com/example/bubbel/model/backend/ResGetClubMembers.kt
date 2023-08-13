@@ -19,11 +19,11 @@ data class ResGetClubMembers (
 @Serializable
 data class GetClubMembersError (
     val ierror: String,
-    val type: Type
+    val type: GetClubMembersType
 )
 
 @Serializable
-enum class Type(val value: String) {
+enum class GetClubMembersType(val value: String) {
     @SerialName("Internal") Internal("Internal");
 }
 
