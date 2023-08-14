@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bubbel.R
 import com.example.bubbel.databinding.VerificationScreenBinding
+
 import com.example.bubbel.viewmodel.onboarding.VerificationViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,19 +29,19 @@ class VerificationView : Fragment() {
     }
 
     private fun setupViews() {
-        binding.loginButton.setOnClickListener {
+        binding.signUpButton.setOnClickListener {
             val verificationCode = binding.verificationInputField.text.toString()
 
-
             CoroutineScope(Dispatchers.Main).launch {
-                viewModel.submitVerification()
-                println("success")
-
-                findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
+                if (viewModel.submitVerification() != null){
+                    findNavController().navigate(R.id.action_verificationFragment_to_appView)
+                }
+                else{
+                    println("Cannot verify")
+                }
             }
         }
-        binding.signUpButton.setOnClickListener{
-
+        binding.loginButton.setOnClickListener{
             findNavController().navigate(R.id.action_verificationFragment_to_loginFragment)
         }
     }

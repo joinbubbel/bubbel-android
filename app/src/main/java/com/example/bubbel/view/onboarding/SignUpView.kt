@@ -40,8 +40,6 @@ class SignUpFragment : Fragment() {
             // Pass the input values to the SignUpViewModel for further processing
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel.submitSignUp(username, email, password, confirmPassword)
-                println("success")
-
                 findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
             }
         }

@@ -1,14 +1,15 @@
 package com.example.bubbel.viewmodel.onboarding
 
+import androidx.compose.material3.AlertDialog
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bubbel.model.backend.CreateUserOut
 import com.example.bubbel.model.backend.InCreateUser
 import com.example.bubbel.model.backend.ResAuthUser
 import com.example.bubbel.repository.BackendRepository
 import com.example.bubbel.model.backend.InSendVerify
 import com.example.bubbel.model.backend.ResCreateUser
-import com.example.bubbel.model.backend.UserId
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
@@ -34,44 +35,37 @@ class SignUpViewModel : ViewModel() {
             return
         }
 
-        //Create user
+        //Create user object
         val user = InCreateUser(email, username, password)
 
-        //Verifying info
-        println(user)
-        println(username)
-        println(password)
-        println(confirmPassword)
-        println(email)
-
-
+        //Send create user request to the server
         backendRepository.createUser(
             user,
             onSuccess = { response ->
-                // Assuming 'response' contains the necessary data to be passed as an argument for InSendVerify()
+                val userId = response?.res?.userID
 
-                var id = gson.toJson(response)
+                if (userId != null){
+                val requestForSendVerify = InSendVerify(userId.toString().toLong())
 
-
-                val requestForSendVerify = InSendVerify(gson.fromJson(id, ResCreateUser::class.java)) // Modify this as per your need
-                println(requestForSendVerify)
                 viewModelScope.launch {
                     backendRepository.sendVerify(
                         request = requestForSendVerify,
                         onSuccess = { responseOfSendVerify ->
-                            // Handle successful response here
-                            // 'responseOfSendVerify' contains the parsed response data
+                            println("Verification sent")
+                            println(responseOfSendVerify)
                         },
                         onError = { errorMessageOfSendVerify ->
-                            // Handle error here
-                            // 'errorMessageOfSendVerify' contains the error message
+                            println(errorMessageOfSendVerify)
+                            println("Send verify error")
+                            println(requestForSendVerify)
                         }
                     )
                 }
+                }
             },
             onError = { errorMessage ->
-                // Handle error here
-                // 'errorMessage' contains the error message
+                println(errorMessage)
+                println("create User error")
             }
         )
     }
