@@ -141,12 +141,17 @@ class BackendRepository {
         })
     }
     suspend fun sendVerify(request: InSendVerify,  onSuccess: (ResSendVerify?) -> Unit, onError: (String) -> Unit){
+        println(request)
+        println("Funtime")
         backendService.sendVerify(request).enqueue(object : Callback<ResSendVerify> {
             override fun onResponse(call: Call<ResSendVerify>, response: Response<ResSendVerify>) {
                 if (response.isSuccessful) {
+                    println(request)
+                    println(request.toString())
                     val out: ResSendVerify? = response.body()
                     onSuccess(out)
                 } else {
+                    println(request)
                     onError(response.errorBody()?.string() ?: "Unknown error occurred")
                 }
             }

@@ -1,10 +1,12 @@
 package com.example.bubbel.viewmodel.onboarding
 
-import androidx.compose.material3.AlertDialog
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bubbel.model.backend.CreateUserOut
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.bubbel.R
+import com.example.bubbel.model.backend.CreateUserError
 import com.example.bubbel.model.backend.InCreateUser
 import com.example.bubbel.model.backend.ResAuthUser
 import com.example.bubbel.repository.BackendRepository
@@ -23,6 +25,7 @@ class SignUpViewModel : ViewModel() {
     val gson = Gson()
 
     val _error = MutableLiveData<String>()
+
     suspend fun submitSignUp(
         username: String,
         email: String,
@@ -35,39 +38,58 @@ class SignUpViewModel : ViewModel() {
             return
         }
 
+        println("flane")
         //Create user object
-        val user = InCreateUser(email, username, password)
-
+        val user = InCreateUser(email, password, username)
+        println(user)
         //Send create user request to the server
         backendRepository.createUser(
             user,
             onSuccess = { response ->
-                val userId = response?.res?.userID
-
-                if (userId != null){
-                val requestForSendVerify = InSendVerify(userId.toString().toLong())
-
-                viewModelScope.launch {
-                    backendRepository.sendVerify(
-                        request = requestForSendVerify,
-                        onSuccess = { responseOfSendVerify ->
-                            println("Verification sent")
-                            println(responseOfSendVerify)
-                        },
-                        onError = { errorMessageOfSendVerify ->
-                            println(errorMessageOfSendVerify)
-                            println("Send verify error")
-                            println(requestForSendVerify)
-                        }
-                    )
-                }
-                }
+               verify(response)
             },
             onError = { errorMessage ->
                 println(errorMessage)
                 println("create User error")
             }
         )
+    }
+    fun verify(response:ResCreateUser?){
+
+        val userId = response?.res?.userID
+        println("Response received: $response")
+        println("UserID extracted: $userId")
+
+        if (userId == null || userId <= 0){
+            println("Invalid UserID, cannot send verification mail")
+            return
+        }
+
+        println("Create user response")
+
+        if (userId != null){
+            val requestForSendVerify = InSendVerify(userId.toString().toLong())
+
+            viewModelScope.launch {
+
+                backendRepository.sendVerify(
+                    request = requestForSendVerify,
+
+                    onSuccess = { responseOfSendVerify ->
+                        println("Verification sent")
+                        println(responseOfSendVerify)
+                    },
+
+                    onError = { errorMessageOfSendVerify ->
+                        println(errorMessageOfSendVerify)
+                        println("Send verify error")
+                        println(requestForSendVerify)
+                    }
+
+                )
+
+            }
+        }
     }
 }
 

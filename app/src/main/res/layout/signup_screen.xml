@@ -59,7 +59,6 @@
             app:srcCompat="@drawable/vector" />
     </LinearLayout>
 
-    <!-- Form fields -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -170,15 +169,17 @@
         android:text="Sign Up"
         android:textColor="@color/white" />
 
-    <TextView
+    <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log In"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:layout_gravity="center"
         android:gravity="center_vertical"
         android:padding="10dp"
+        android:background="@android:color/transparent"
         android:autoLink="web"
         android:textColorLink="#0057FF" />
     </LinearLayout>

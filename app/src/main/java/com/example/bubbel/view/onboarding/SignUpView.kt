@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.bubbel.R
@@ -40,13 +41,12 @@ class SignUpFragment : Fragment() {
             // Pass the input values to the SignUpViewModel for further processing
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel.submitSignUp(username, email, password, confirmPassword)
-                findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
             }
+            findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
         }
         binding.loginButton.setOnClickListener {
             print("ok")
-            val saveIntent = Intent(requireContext(), LoginFragment::class.java)
-            startActivity(saveIntent)
+            findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
         }
     }
 }
