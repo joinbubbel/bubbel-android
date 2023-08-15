@@ -10,4 +10,8 @@ import kotlinx.serialization.json.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
-typealias InGetRandomClubs = HashMap<String, JsonElement?>
+@Serializable
+data class InGetRandomClubs (
+    @SerialName("_ignore")
+    val ignore: JsonElement? = null
+)
