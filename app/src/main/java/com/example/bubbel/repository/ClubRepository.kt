@@ -46,6 +46,7 @@ class ClubRepository(private val context: Context) {
             }
         } catch (e: XmlPullParserException) {
             e.printStackTrace()
+            println("cheese")
         } catch (e: IOException) {
             e.printStackTrace()
         }
