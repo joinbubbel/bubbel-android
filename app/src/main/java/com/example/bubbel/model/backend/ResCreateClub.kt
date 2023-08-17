@@ -24,6 +24,7 @@ data class CreateClubError (
 
 @Serializable
 enum class ResCreateClubErrorType(val value: String) {
+    @SerialName("ClubAlreadyExists") ClubAlreadyExists("ClubAlreadyExists"),
     @SerialName("Internal") Internal("Internal"),
     @SerialName("NoAuth") NoAuth("NoAuth");
 }

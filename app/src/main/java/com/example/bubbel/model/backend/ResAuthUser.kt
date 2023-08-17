@@ -22,6 +22,10 @@ data class ResAuthUser (
 @Serializable
 data class AuthUserError (
     val type: ResAuthUserErrorType,
+
+    @SerialName("user_id")
+    val userID: Long? = null,
+
     val ierror: String? = null
 )
 

@@ -61,6 +61,8 @@ interface backendService {
     fun regexSearchUsers(@Body userData: InRegexSearchUsers): Call<ResRegexSearchUsers>
     @POST("/api/get_random_clubs")
     fun getRandomClubs(@Body userData: InGetRandomClubs): Call<ResGetRandomClubs>
+    @POST("/api/check_token")
+    fun checkToken(@Body userData: InCheckToken): Call<ResCheckToken>
 }
 
 //  This was originally went in "RetrofitClient.kt"
@@ -442,6 +444,22 @@ class BackendRepository {
             }
 
             override fun onFailure(call: Call<ResGetRandomClubs>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun checkToken(request: InCheckToken,  onSuccess: (ResCheckToken?) -> Unit, onError: (String) -> Unit){
+        backendService.checkToken(request).enqueue(object : Callback<ResCheckToken> {
+            override fun onResponse(call: Call<ResCheckToken>, response: Response<ResCheckToken>) {
+                if (response.isSuccessful) {
+                    val out: ResCheckToken? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResCheckToken>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }
         })
