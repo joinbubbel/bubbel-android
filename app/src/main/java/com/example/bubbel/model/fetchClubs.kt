@@ -12,20 +12,20 @@ class FetchClubs(private val context: Context) {
 
     fun fetch() {
         val factory = XmlPullParserFactory.newInstance()
-        val parser = context.resources.getXml(R.xml.club_data)
+        val parser = context.resources.getXml(R.raw.club_data)
         while (parser.next() != XmlPullParser.END_DOCUMENT) {
             if (parser.eventType == XmlPullParser.START_TAG && parser.name == "club") {
                 var image: String? = null
                 var title: String? = null
-                var isVerified: Boolean? = null
-                var membersOnline: String? = null
+                var isVerified: Boolean = false
+                var membersOnline: Int = 0
                 while (parser.next() != XmlPullParser.END_TAG || parser.name != "club") {
                     if (parser.eventType == XmlPullParser.START_TAG) {
                         when (parser.name) {
                             "image" -> image = parser.nextText()
                             "title" -> title = parser.nextText()
                             "isVerified" -> isVerified = parser.nextText().toBoolean()
-                            "membersOnline" -> membersOnline = parser.nextText()
+                            "membersOnline" -> membersOnline = parser.nextText().toInt()
                         }
                     }
                 }

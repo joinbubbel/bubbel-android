@@ -39,9 +39,9 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Handler(Looper.getMainLooper()).postDelayed({
             when{
-                 viewModel.isFirstTime() -> findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
-                 viewModel.isLoggedIn() -> findNavController().navigate(R.id.action_splashScreenFragment_to_appView)
-                 else -> findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
+                 !viewModel.isFirstTime() -> findNavController().navigate(R.id.action_splashScreenFragment_to_appView)
+                 !viewModel.isLoggedIn() -> findNavController().navigate(R.id.action_splashScreenFragment_to_appView)
+                 else -> findNavController().navigate(R.id.action_splashScreenFragment_to_appView)
             }
         }, DELAY_MILLIS)
     }
