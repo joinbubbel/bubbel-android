@@ -77,7 +77,7 @@ object RetrofitClient {
 class BackendRepository {
     private val backendService = RetrofitClient.api
 
-    suspend fun createUser(request: InCreateUser, onSuccess: (ResCreateUser?) -> Unit, onError: (String) -> Unit){
+    suspend fun createUser(request: InCreateUser,  onSuccess: (ResCreateUser?) -> Unit, onError: (String) -> Unit){
         backendService.createUser(request).enqueue(object : Callback<ResCreateUser> {
             override fun onResponse(call: Call<ResCreateUser>, response: Response<ResCreateUser>) {
                 if (response.isSuccessful) {
@@ -135,6 +135,7 @@ class BackendRepository {
                     onError(response.errorBody()?.string() ?: "Unknown error occurred")
                 }
             }
+
             override fun onFailure(call: Call<ResVerifyAccount>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }

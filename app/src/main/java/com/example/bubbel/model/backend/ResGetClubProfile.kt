@@ -32,6 +32,10 @@ enum class ResGetClubProfileErrorType(val value: String) {
 @Serializable
 data class GetClubProfileOut (
     val banner: String? = null,
+
+    @SerializedName("dc_id")
+    val dcID: Long,
+
     val description: String? = null,
 
     @SerializedName("display_name")

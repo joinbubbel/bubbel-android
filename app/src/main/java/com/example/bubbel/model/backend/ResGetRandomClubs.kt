@@ -41,6 +41,10 @@ sealed class Club {
 @Serializable
 data class ClubProfile (
     val banner: String? = null,
+
+    @SerializedName("dc_id")
+    val dcID: Long,
+
     val description: String? = null,
 
     @SerializedName("display_name")

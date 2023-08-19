@@ -17,6 +17,9 @@ data class InSetClubProfile (
     @SerializedName("club_id")
     val clubID: Long,
 
+    @SerializedName("dc_id")
+    val dcID: Long? = null,
+
     val description: String? = null,
 
     @SerializedName("display_name")
