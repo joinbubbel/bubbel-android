@@ -27,8 +27,8 @@ data class DeleteClubError (
 
 @Serializable
 enum class ResDeleteClubErrorType(val value: String) {
-    @SerialName("ClubNotFound") ClubNotFound("ClubNotFound"),
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("NoAuth") NoAuth("NoAuth"),
-    @SerialName("NoAuthOwner") NoAuthOwner("NoAuthOwner");
+    @SerializedName("ClubNotFound") ClubNotFound("ClubNotFound"),
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("NoAuth") NoAuth("NoAuth"),
+    @SerializedName("NoAuthOwner") NoAuthOwner("NoAuthOwner");
 }

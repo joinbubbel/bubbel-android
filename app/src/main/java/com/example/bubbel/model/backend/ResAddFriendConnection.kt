@@ -24,8 +24,8 @@ data class AddFriendConnectionError (
 
 @Serializable
 enum class ResAddFriendConnectionErrorType(val value: String) {
-    @SerialName("AlreadyConnected") AlreadyConnected("AlreadyConnected"),
-    @SerialName("CannotAddSelf") CannotAddSelf("CannotAddSelf"),
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("NoAuth") NoAuth("NoAuth");
+    @SerializedName("AlreadyConnected") AlreadyConnected("AlreadyConnected"),
+    @SerializedName("CannotAddSelf") CannotAddSelf("CannotAddSelf"),
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("NoAuth") NoAuth("NoAuth");
 }

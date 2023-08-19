@@ -12,7 +12,7 @@ import kotlinx.serialization.encoding.*
 
 @Serializable
 data class InRegexSearchClubs (
-    @SerialName("batch_index")
+    @SerializedName("batch_index")
     val batchIndex: Long,
 
     val regex: String

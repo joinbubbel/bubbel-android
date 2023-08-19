@@ -24,7 +24,7 @@ data class GetClubMembersError (
 
 @Serializable
 enum class ResGetClubMembersErrorType(val value: String) {
-    @SerialName("Internal") Internal("Internal");
+    @SerializedName("Internal") Internal("Internal");
 }
 
 @Serializable

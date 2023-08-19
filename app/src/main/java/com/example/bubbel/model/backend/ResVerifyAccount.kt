@@ -27,6 +27,6 @@ data class VerifyAccountError (
 
 @Serializable
 enum class ResVerifyAccountErrorType(val value: String) {
-    @SerialName("CodeTimedOutOrAlreadyVerifiedOrInvalidCode") CodeTimedOutOrAlreadyVerifiedOrInvalidCode("CodeTimedOutOrAlreadyVerifiedOrInvalidCode"),
-    @SerialName("Internal") Internal("Internal");
+    @SerializedName("CodeTimedOutOrAlreadyVerifiedOrInvalidCode") CodeTimedOutOrAlreadyVerifiedOrInvalidCode("CodeTimedOutOrAlreadyVerifiedOrInvalidCode"),
+    @SerializedName("Internal") Internal("Internal");
 }

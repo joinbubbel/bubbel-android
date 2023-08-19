@@ -12,7 +12,7 @@ import kotlinx.serialization.encoding.*
 
 @Serializable
 data class InRemoveFriend (
-    @SerialName("removal_id")
+    @SerializedName("removal_id")
     val removalID: Long,
 
     val token: String

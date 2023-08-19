@@ -24,8 +24,8 @@ data class RegexSearchClubsError (
 
 @Serializable
 enum class ResRegexSearchClubsErrorType(val value: String) {
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("RegexLimit") RegexLimit("RegexLimit");
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("RegexLimit") RegexLimit("RegexLimit");
 }
 
 @Serializable

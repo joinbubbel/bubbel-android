@@ -24,8 +24,8 @@ data class RegexSearchUsersError (
 
 @Serializable
 enum class ResRegexSearchUsersErrorType(val value: String) {
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("RegexLimit") RegexLimit("RegexLimit");
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("RegexLimit") RegexLimit("RegexLimit");
 }
 
 @Serializable

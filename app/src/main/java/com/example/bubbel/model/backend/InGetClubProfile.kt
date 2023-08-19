@@ -12,7 +12,7 @@ import kotlinx.serialization.encoding.*
 
 @Serializable
 data class InGetClubProfile (
-    @SerialName("club_id")
+    @SerializedName("club_id")
     val clubID: Long,
 
     val token: String? = null

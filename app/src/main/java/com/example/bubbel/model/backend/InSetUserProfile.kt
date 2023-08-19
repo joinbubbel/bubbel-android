@@ -15,7 +15,7 @@ data class InSetUserProfile (
     val banner: String? = null,
     val description: String? = null,
 
-    @SerialName("display_name")
+    @SerializedName("display_name")
     val displayName: String? = null,
 
     val name: String? = null,

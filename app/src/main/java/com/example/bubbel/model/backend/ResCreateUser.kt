@@ -35,16 +35,16 @@ data class CreateUserError (
 
 @Serializable
 enum class ResCreateUserErrorType(val value: String) {
-    @SerialName("EmailOrUsernametaken") EmailOrUsernametaken("EmailOrUsernametaken"),
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("InvalidEmail") InvalidEmail("InvalidEmail"),
-    @SerialName("InvalidPassword") InvalidPassword("InvalidPassword"),
-    @SerialName("InvalidPasswordCryto") InvalidPasswordCryto("InvalidPasswordCryto"),
-    @SerialName("InvalidUsername") InvalidUsername("InvalidUsername");
+    @SerializedName("EmailOrUsernametaken") EmailOrUsernametaken("EmailOrUsernametaken"),
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("InvalidEmail") InvalidEmail("InvalidEmail"),
+    @SerializedName("InvalidPassword") InvalidPassword("InvalidPassword"),
+    @SerializedName("InvalidPasswordCryto") InvalidPasswordCryto("InvalidPasswordCryto"),
+    @SerializedName("InvalidUsername") InvalidUsername("InvalidUsername");
 }
 
 @Serializable
 data class CreateUserOut (
-    @SerialName("user_id")
+    @SerializedName("user_id")
     val userID: Long
 )

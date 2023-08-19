@@ -54,6 +54,12 @@ interface backendService {
     fun regexSearchClubs(@Body userData: InRegexSearchClubs): Call<ResRegexSearchClubs>
     @POST("/api/regex_search_users")
     fun regexSearchUsers(@Body userData: InRegexSearchUsers): Call<ResRegexSearchUsers>
+    @POST("/api/get_random_clubs")
+    fun getRandomClubs(@Body userData: InGetRandomClubs): Call<ResGetRandomClubs>
+    @POST("/api/check_token")
+    fun checkToken(@Body userData: InCheckToken): Call<ResCheckToken>
+    @POST("/api/unsafe_add_file")
+    fun unsafeAddFile(@Body userData: InUnsafeAddFile): Call<ResUnsafeAddFile>
 }
 
 //  This was originally went in "RetrofitClient.kt"
@@ -418,6 +424,54 @@ class BackendRepository {
             }
 
             override fun onFailure(call: Call<ResRegexSearchUsers>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun getRandomClubs(request: InGetRandomClubs,  onSuccess: (ResGetRandomClubs?) -> Unit, onError: (String) -> Unit){
+        backendService.getRandomClubs(request).enqueue(object : Callback<ResGetRandomClubs> {
+            override fun onResponse(call: Call<ResGetRandomClubs>, response: Response<ResGetRandomClubs>) {
+                if (response.isSuccessful) {
+                    val out: ResGetRandomClubs? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResGetRandomClubs>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun checkToken(request: InCheckToken,  onSuccess: (ResCheckToken?) -> Unit, onError: (String) -> Unit){
+        backendService.checkToken(request).enqueue(object : Callback<ResCheckToken> {
+            override fun onResponse(call: Call<ResCheckToken>, response: Response<ResCheckToken>) {
+                if (response.isSuccessful) {
+                    val out: ResCheckToken? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResCheckToken>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun unsafeAddFile(request: InUnsafeAddFile,  onSuccess: (ResUnsafeAddFile?) -> Unit, onError: (String) -> Unit){
+        backendService.unsafeAddFile(request).enqueue(object : Callback<ResUnsafeAddFile> {
+            override fun onResponse(call: Call<ResUnsafeAddFile>, response: Response<ResUnsafeAddFile>) {
+                if (response.isSuccessful) {
+                    val out: ResUnsafeAddFile? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResUnsafeAddFile>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }
         })

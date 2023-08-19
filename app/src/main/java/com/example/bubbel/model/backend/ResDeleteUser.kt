@@ -24,6 +24,6 @@ data class DeleteUserError (
 
 @Serializable
 enum class ResDeleteUserErrorType(val value: String) {
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("NoAuth") NoAuth("NoAuth");
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("NoAuth") NoAuth("NoAuth");
 }

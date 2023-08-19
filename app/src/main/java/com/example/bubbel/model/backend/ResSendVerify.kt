@@ -27,8 +27,8 @@ data class SendVerifyError (
 
 @Serializable
 enum class ResSendVerifyErrorType(val value: String) {
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("ResendTooSoon") ResendTooSoon("ResendTooSoon"),
-    @SerialName("SendVerification") SendVerification("SendVerification"),
-    @SerialName("UserNotFound") UserNotFound("UserNotFound");
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("ResendTooSoon") ResendTooSoon("ResendTooSoon"),
+    @SerializedName("SendVerification") SendVerification("SendVerification"),
+    @SerializedName("UserNotFound") UserNotFound("UserNotFound");
 }

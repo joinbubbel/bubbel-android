@@ -27,10 +27,10 @@ data class SetClubProfileError (
 
 @Serializable
 enum class ResSetClubProfileErrorType(val value: String) {
-    @SerialName("ClubNotFound") ClubNotFound("ClubNotFound"),
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("NoAuth") NoAuth("NoAuth"),
-    @SerialName("NoAuthOwner") NoAuthOwner("NoAuthOwner"),
-    @SerialName("SettingNameNotSupportedYet") SettingNameNotSupportedYet("SettingNameNotSupportedYet"),
-    @SerialName("SettingOwnerNotSupportedYet") SettingOwnerNotSupportedYet("SettingOwnerNotSupportedYet");
+    @SerializedName("ClubNotFound") ClubNotFound("ClubNotFound"),
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("NoAuth") NoAuth("NoAuth"),
+    @SerializedName("NoAuthOwner") NoAuthOwner("NoAuthOwner"),
+    @SerializedName("SettingNameNotSupportedYet") SettingNameNotSupportedYet("SettingNameNotSupportedYet"),
+    @SerializedName("SettingOwnerNotSupportedYet") SettingOwnerNotSupportedYet("SettingOwnerNotSupportedYet");
 }

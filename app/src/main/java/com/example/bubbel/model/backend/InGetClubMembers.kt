@@ -12,6 +12,6 @@ import kotlinx.serialization.encoding.*
 
 @Serializable
 data class InGetClubMembers (
-    @SerialName("club_id")
+    @SerializedName("club_id")
     val clubID: Long
 )

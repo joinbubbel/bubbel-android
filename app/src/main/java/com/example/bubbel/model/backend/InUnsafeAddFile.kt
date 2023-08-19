@@ -1,7 +1,7 @@
 // To parse the JSON, install kotlin's serialization plugin and do:
 //
-// val json           = Json { allowStructuredMapKeys = true }
-// val inGetUserClubs = json.parse(InGetUserClubs.serializer(), jsonString)
+// val json            = Json { allowStructuredMapKeys = true }
+// val inUnsafeAddFile = json.parse(InUnsafeAddFile.serializer(), jsonString)
 
 package com.example.bubbel.model.backend
 
@@ -11,7 +11,7 @@ import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 @Serializable
-data class InGetUserClubs (
-    @SerializedName("user_id")
-    val userID: Long
+data class InUnsafeAddFile (
+    val data: String,
+    val extension: String
 )
