@@ -24,7 +24,7 @@ data class GetRandomClubsError (
 
 @Serializable
 enum class ResGetRandomClubsErrorType(val value: String) {
-    @SerialName("Internal") Internal("Internal");
+    @SerializedName("Internal") Internal("Internal");
 }
 
 @Serializable
@@ -43,7 +43,7 @@ data class ClubProfile (
     val banner: String? = null,
     val description: String? = null,
 
-    @SerialName("display_name")
+    @SerializedName("display_name")
     val displayName: String? = null,
 
     val name: String,

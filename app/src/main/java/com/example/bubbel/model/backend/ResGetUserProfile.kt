@@ -24,9 +24,9 @@ data class GetUserProfileError (
 
 @Serializable
 enum class ResGetUserProfileErrorType(val value: String) {
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("NoAuth") NoAuth("NoAuth"),
-    @SerialName("UserNotFound") UserNotFound("UserNotFound");
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("NoAuth") NoAuth("NoAuth"),
+    @SerializedName("UserNotFound") UserNotFound("UserNotFound");
 }
 
 @Serializable
@@ -34,7 +34,7 @@ data class GetUserProfileOut (
     val banner: String? = null,
     val description: String? = null,
 
-    @SerialName("display_name")
+    @SerializedName("display_name")
     val displayName: String? = null,
 
     val name: String? = null,

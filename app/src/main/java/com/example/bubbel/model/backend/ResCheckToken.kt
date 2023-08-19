@@ -23,11 +23,11 @@ data class CheckTokenError (
 
 @Serializable
 enum class ResCheckTokenErrorType(val value: String) {
-    @SerialName("Ignore") Ignore("Ignore");
+    @SerializedName("Ignore") Ignore("Ignore");
 }
 
 @Serializable
 data class CheckTokenOut (
-    @SerialName("user_id")
+    @SerializedName("user_id")
     val userID: Long? = null
 )

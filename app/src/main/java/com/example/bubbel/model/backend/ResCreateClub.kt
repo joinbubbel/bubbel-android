@@ -24,13 +24,13 @@ data class CreateClubError (
 
 @Serializable
 enum class ResCreateClubErrorType(val value: String) {
-    @SerialName("ClubAlreadyExists") ClubAlreadyExists("ClubAlreadyExists"),
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("NoAuth") NoAuth("NoAuth");
+    @SerializedName("ClubAlreadyExists") ClubAlreadyExists("ClubAlreadyExists"),
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("NoAuth") NoAuth("NoAuth");
 }
 
 @Serializable
 data class CreateClubOut (
-    @SerialName("club_id")
+    @SerializedName("club_id")
     val clubID: Long
 )

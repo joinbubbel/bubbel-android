@@ -12,6 +12,6 @@ import kotlinx.serialization.encoding.*
 
 @Serializable
 data class InGetRandomClubs (
-    @SerialName("_ignore")
+    @SerializedName("_ignore")
     val ignore: JsonElement? = null
 )

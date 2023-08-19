@@ -12,6 +12,6 @@ import kotlinx.serialization.encoding.*
 
 @Serializable
 data class InSendVerify (
-    @SerialName("user_id")
+    @SerializedName("user_id")
     val userID: Long
 )

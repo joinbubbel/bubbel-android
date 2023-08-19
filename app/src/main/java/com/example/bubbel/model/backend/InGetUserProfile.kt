@@ -14,6 +14,6 @@ import kotlinx.serialization.encoding.*
 data class InGetUserProfile (
     val token: String? = null,
 
-    @SerialName("user_id")
+    @SerializedName("user_id")
     val userID: Long
 )

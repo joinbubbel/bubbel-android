@@ -14,12 +14,12 @@ import kotlinx.serialization.encoding.*
 data class InSetClubProfile (
     val banner: String? = null,
 
-    @SerialName("club_id")
+    @SerializedName("club_id")
     val clubID: Long,
 
     val description: String? = null,
 
-    @SerialName("display_name")
+    @SerializedName("display_name")
     val displayName: String? = null,
 
     val name: String? = null,

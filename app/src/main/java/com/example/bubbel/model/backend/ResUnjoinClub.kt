@@ -24,8 +24,8 @@ data class UnjoinClubError (
 
 @Serializable
 enum class ResUnjoinClubErrorType(val value: String) {
-    @SerialName("CannotUnjoinAsOwner") CannotUnjoinAsOwner("CannotUnjoinAsOwner"),
-    @SerialName("ClubNotFound") ClubNotFound("ClubNotFound"),
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("NoAuth") NoAuth("NoAuth");
+    @SerializedName("CannotUnjoinAsOwner") CannotUnjoinAsOwner("CannotUnjoinAsOwner"),
+    @SerializedName("ClubNotFound") ClubNotFound("ClubNotFound"),
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("NoAuth") NoAuth("NoAuth");
 }

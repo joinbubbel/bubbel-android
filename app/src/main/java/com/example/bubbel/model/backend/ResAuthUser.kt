@@ -23,7 +23,7 @@ data class ResAuthUser (
 data class AuthUserError (
     val type: ResAuthUserErrorType,
 
-    @SerialName("user_id")
+    @SerializedName("user_id")
     val userID: Long? = null,
 
     val ierror: String? = null
@@ -31,11 +31,11 @@ data class AuthUserError (
 
 @Serializable
 enum class ResAuthUserErrorType(val value: String) {
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("InvalidCredentials") InvalidCredentials("InvalidCredentials"),
-    @SerialName("InvalidPasswordCryto") InvalidPasswordCryto("InvalidPasswordCryto"),
-    @SerialName("UserNotFound") UserNotFound("UserNotFound"),
-    @SerialName("UserNotVerified") UserNotVerified("UserNotVerified");
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("InvalidCredentials") InvalidCredentials("InvalidCredentials"),
+    @SerializedName("InvalidPasswordCryto") InvalidPasswordCryto("InvalidPasswordCryto"),
+    @SerializedName("UserNotFound") UserNotFound("UserNotFound"),
+    @SerializedName("UserNotVerified") UserNotVerified("UserNotVerified");
 }
 
 @Serializable

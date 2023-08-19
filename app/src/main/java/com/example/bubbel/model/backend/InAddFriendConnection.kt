@@ -12,7 +12,7 @@ import kotlinx.serialization.encoding.*
 
 @Serializable
 data class InAddFriendConnection (
-    @SerialName("receiver_id")
+    @SerializedName("receiver_id")
     val receiverID: Long,
 
     val token: String

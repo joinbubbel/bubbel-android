@@ -24,11 +24,11 @@ data class UnsafeAddFileError (
 
 @Serializable
 enum class ResUnsafeAddFileErrorType(val value: String) {
-    @SerialName("Internal") Internal("Internal");
+    @SerializedName("Internal") Internal("Internal");
 }
 
 @Serializable
 data class UnsafeAddFileOut (
-    @SerialName("file_link")
+    @SerializedName("file_link")
     val fileLink: String
 )

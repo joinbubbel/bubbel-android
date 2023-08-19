@@ -24,9 +24,9 @@ data class GetClubProfileError (
 
 @Serializable
 enum class ResGetClubProfileErrorType(val value: String) {
-    @SerialName("ClubNotFound") ClubNotFound("ClubNotFound"),
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("NoAuth") NoAuth("NoAuth");
+    @SerializedName("ClubNotFound") ClubNotFound("ClubNotFound"),
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("NoAuth") NoAuth("NoAuth");
 }
 
 @Serializable
@@ -34,7 +34,7 @@ data class GetClubProfileOut (
     val banner: String? = null,
     val description: String? = null,
 
-    @SerialName("display_name")
+    @SerializedName("display_name")
     val displayName: String? = null,
 
     val name: String,

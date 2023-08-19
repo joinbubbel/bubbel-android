@@ -24,7 +24,7 @@ data class JoinClubError (
 
 @Serializable
 enum class ResJoinClubErrorType(val value: String) {
-    @SerialName("AlreadyJoined") AlreadyJoined("AlreadyJoined"),
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("NoAuth") NoAuth("NoAuth");
+    @SerializedName("AlreadyJoined") AlreadyJoined("AlreadyJoined"),
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("NoAuth") NoAuth("NoAuth");
 }

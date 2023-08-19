@@ -24,19 +24,19 @@ data class GetFriendConnectionsError (
 
 @Serializable
 enum class ResGetFriendConnectionsErrorType(val value: String) {
-    @SerialName("Internal") Internal("Internal"),
-    @SerialName("NoAuth") NoAuth("NoAuth");
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("NoAuth") NoAuth("NoAuth");
 }
 
 @Serializable
 data class GetFriendConnectionsOut (
-    @SerialName("friend_connections")
+    @SerializedName("friend_connections")
     val friendConnections: Map<String, FriendStatus>
 )
 
 @Serializable
 enum class FriendStatus(val value: String) {
-    @SerialName("Full") Full("Full"),
-    @SerialName("RecievedPending") RecievedPending("RecievedPending"),
-    @SerialName("SentPending") SentPending("SentPending");
+    @SerializedName("Full") Full("Full"),
+    @SerializedName("RecievedPending") RecievedPending("RecievedPending"),
+    @SerializedName("SentPending") SentPending("SentPending");
 }
