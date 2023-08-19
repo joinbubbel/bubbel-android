@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.bubbel.model.backend.InCreateUser
 import com.example.bubbel.repository.BackendRepository
 
-class VerificationViewModel : ViewModel() {
+class VerificationViewModel(userID:Long) : ViewModel() {
     private val backendRepository = BackendRepository()
 
     suspend fun submitVerification(

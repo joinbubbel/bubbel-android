@@ -11,30 +11,30 @@
         android:background="#0057FF"
         android:orientation="horizontal">
         <LinearLayout
-        android:id="@+id/loginHeader"
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+            android:id="@+id/loginHeader"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-            android:id="@+id/loginHeaderContent1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:textColor="#FFFFFF"
-            android:textSize="26sp"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="74dp" />
+                android:id="@+id/loginHeaderContent1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="74dp" />
 
             <TextView
-            android:id="@+id/loginHeaderContent2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Welcome Back!"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="14dp" />
+                android:id="@+id/loginHeaderContent2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome Back!"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="14dp" />
         </LinearLayout>
 
         <ImageView

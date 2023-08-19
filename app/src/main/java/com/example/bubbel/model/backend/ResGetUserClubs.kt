@@ -19,7 +19,7 @@ data class ResGetUserClubs (
 @Serializable
 data class GetUserClubsError (
     val ierror: String,
-    val type: Type
+    val type: ResGetClubProfileErrorType
 )
 
 @Serializable

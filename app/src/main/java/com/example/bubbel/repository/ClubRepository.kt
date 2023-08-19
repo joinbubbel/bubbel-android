@@ -1,16 +1,17 @@
 package com.example.bubbel.repository
 
 import android.content.Context
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.bubbel.R
 import com.example.bubbel.model.Club
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import org.xmlpull.v1.XmlPullParserFactory
+import java.io.ByteArrayOutputStream
 import java.io.IOException
 
-class ClubRepository(private val context: Context) {
-
-    fun getClubsFromXml(): List<Club> {
+class ClubRepository() {
+    fun getClubsFromXml(context: Context): List<Club> {
         return parseXml(context)
     }
 
@@ -21,7 +22,7 @@ class ClubRepository(private val context: Context) {
         try {
             parserFactory = XmlPullParserFactory.newInstance()
             val parser = parserFactory.newPullParser()
-            val inputStream = context.resources.openRawResource(R.xml.club_data) // Open the XML from res/xml/clubs.xml
+            val inputStream = context.resources.openRawResource(R.raw.club_data) // Open the XML from res/xml/clubs.xml
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
             parser.setInput(inputStream, null)
 
@@ -37,7 +38,7 @@ class ClubRepository(private val context: Context) {
                             parser.getAttributeValue(null, "image"),
                             parser.getAttributeValue(null, "title"),
                             parser.getAttributeValue(null, "isVerified").toBoolean(),
-                            parser.getAttributeValue(null, "membersOnline")
+                            parser.getAttributeValue(null, "membersOnline").toInt()
                         )
                         clubs.add(currentClub)
                     }
@@ -46,11 +47,29 @@ class ClubRepository(private val context: Context) {
             }
         } catch (e: XmlPullParserException) {
             e.printStackTrace()
+            println("cheese")
         } catch (e: IOException) {
             e.printStackTrace()
         }
 
         return clubs
+    }
+    fun loadJSONFromRaw(context: Context, resourceId: Int): String {
+        val inputStream = context.resources.openRawResource(resourceId)
+        val byteArrayOutputStream = ByteArrayOutputStream()
+
+        try {
+            var i = inputStream.read()
+            while (i != -1) {
+                byteArrayOutputStream.write(i)
+                i = inputStream.read()
+            }
+            inputStream.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return byteArrayOutputStream.toString()
     }
 
 }

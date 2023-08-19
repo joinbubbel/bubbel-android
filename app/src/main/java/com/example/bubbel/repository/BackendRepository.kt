@@ -129,7 +129,6 @@ class BackendRepository {
                     onError(response.errorBody()?.string() ?: "Unknown error occurred")
                 }
             }
-
             override fun onFailure(call: Call<ResVerifyAccount>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }
