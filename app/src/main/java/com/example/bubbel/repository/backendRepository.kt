@@ -60,6 +60,8 @@ interface backendService {
     fun checkToken(@Body userData: InCheckToken): Call<ResCheckToken>
     @POST("/api/unsafe_add_file")
     fun unsafeAddFile(@Body userData: InUnsafeAddFile): Call<ResUnsafeAddFile>
+    @POST("/api/get_data_channel_chunk")
+    fun getDataChannelChunk(@Body userData: InGetDataChannelChunk): Call<ResGetDataChannelChunk>
 }
 
 //  This was originally went in "RetrofitClient.kt"
@@ -473,6 +475,22 @@ class BackendRepository {
             }
 
             override fun onFailure(call: Call<ResUnsafeAddFile>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun getDataChannelChunk(request: InGetDataChannelChunk,  onSuccess: (ResGetDataChannelChunk?) -> Unit, onError: (String) -> Unit){
+        backendService.getDataChannelChunk(request).enqueue(object : Callback<ResGetDataChannelChunk> {
+            override fun onResponse(call: Call<ResGetDataChannelChunk>, response: Response<ResGetDataChannelChunk>) {
+                if (response.isSuccessful) {
+                    val out: ResGetDataChannelChunk? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResGetDataChannelChunk>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }
         })
