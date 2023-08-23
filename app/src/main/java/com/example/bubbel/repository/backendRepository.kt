@@ -64,6 +64,8 @@ interface backendService {
     fun getDataChannelChunk(@Body userData: InGetDataChannelChunk): Call<ResGetDataChannelChunk>
     @POST("/api/get_club_profile_with_name")
     fun getClubProfileWithName(@Body userData: InGetClubProfileWithName): Call<ResGetClubProfileWithName>
+    @POST("/api/get_random_users")
+    fun getRandomUsers(@Body userData: InGetRandomUsers): Call<ResGetRandomUsers>
 }
 
 //  This was originally went in "RetrofitClient.kt"
@@ -509,6 +511,22 @@ class BackendRepository {
             }
 
             override fun onFailure(call: Call<ResGetClubProfileWithName>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun getRandomUsers(request: InGetRandomUsers,  onSuccess: (ResGetRandomUsers?) -> Unit, onError: (String) -> Unit){
+        backendService.getRandomUsers(request).enqueue(object : Callback<ResGetRandomUsers> {
+            override fun onResponse(call: Call<ResGetRandomUsers>, response: Response<ResGetRandomUsers>) {
+                if (response.isSuccessful) {
+                    val out: ResGetRandomUsers? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResGetRandomUsers>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }
         })
