@@ -40,6 +40,9 @@ data class GetClubProfileWithNameOut (
     @SerializedName("display_name")
     val displayName: String? = null,
 
+    @SerializedName("is_member")
+    val isMember: Boolean? = null,
+
     val name: String,
     val owner: Long,
     val pfp: String? = null
