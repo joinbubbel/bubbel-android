@@ -66,6 +66,8 @@ interface backendService {
     fun getClubProfileWithName(@Body userData: InGetClubProfileWithName): Call<ResGetClubProfileWithName>
     @POST("/api/get_random_users")
     fun getRandomUsers(@Body userData: InGetRandomUsers): Call<ResGetRandomUsers>
+    @POST("/api/username_to_id")
+    fun usernameToId(@Body userData: InUsernameToId): Call<ResUsernameToId>
 }
 
 //  This was originally went in "RetrofitClient.kt"
@@ -527,6 +529,22 @@ class BackendRepository {
             }
 
             override fun onFailure(call: Call<ResGetRandomUsers>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun usernameToId(request: InUsernameToId,  onSuccess: (ResUsernameToId?) -> Unit, onError: (String) -> Unit){
+        backendService.usernameToId(request).enqueue(object : Callback<ResUsernameToId> {
+            override fun onResponse(call: Call<ResUsernameToId>, response: Response<ResUsernameToId>) {
+                if (response.isSuccessful) {
+                    val out: ResUsernameToId? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResUsernameToId>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }
         })
