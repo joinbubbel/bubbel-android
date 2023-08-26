@@ -1,3 +1,4 @@
+import com.google.gson.annotations.SerializedName
 // To parse the JSON, install kotlin's serialization plugin and do:
 //
 // val json                  = Json { allowStructuredMapKeys = true }
