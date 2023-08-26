@@ -35,7 +35,7 @@ data class CreateUserError (
 
 @Serializable
 enum class ResCreateUserErrorType(val value: String) {
-    @SerializedName("EmailOrUsernametaken") EmailOrUsernametaken("EmailOrUsernametaken"),
+    @SerializedName("EmailOrUsernameTaken") EmailOrUsernameTaken("EmailOrUsernameTaken"),
     @SerializedName("Internal") Internal("Internal"),
     @SerializedName("InvalidEmail") InvalidEmail("InvalidEmail"),
     @SerializedName("InvalidPassword") InvalidPassword("InvalidPassword"),
