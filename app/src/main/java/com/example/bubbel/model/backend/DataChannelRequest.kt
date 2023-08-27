@@ -22,7 +22,10 @@ data class DataChannelCommandType (
     val message: Message? = null,
     val type: DataChannelCommandTypeType,
     val chunk: Long? = null,
-    val index: Long? = null
+    val index: Long? = null,
+
+    @SerializedName("new_message")
+    val newMessage: Message? = null
 )
 
 @Serializable
@@ -39,5 +42,6 @@ enum class MessageType(val value: String) {
 @Serializable
 enum class DataChannelCommandTypeType(val value: String) {
     @SerializedName("Delete") Delete("Delete"),
+    @SerializedName("Edit") Edit("Edit"),
     @SerializedName("Send") Send("Send");
 }

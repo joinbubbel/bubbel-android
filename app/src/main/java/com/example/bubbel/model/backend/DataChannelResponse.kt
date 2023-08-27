@@ -26,14 +26,22 @@ data class DataChannelError (
 @Serializable
 enum class ErrorType(val value: String) {
     @SerializedName("ChannelNotFound") ChannelNotFound("ChannelNotFound"),
+    @SerializedName("ChunkNotFound") ChunkNotFound("ChunkNotFound"),
+    @SerializedName("DataItemDeleted") DataItemDeleted("DataItemDeleted"),
+    @SerializedName("DataItemNotFound") DataItemNotFound("DataItemNotFound"),
     @SerializedName("Internal") Internal("Internal"),
     @SerializedName("NoAuth") NoAuth("NoAuth");
 }
 
 @Serializable
 data class DataChannelResponseType (
-    val item: DataChannelItem,
-    val type: DataChannelResponseTypeType
+    val item: DataChannelItem? = null,
+    val type: ResType,
+    val chunk: Long? = null,
+    val index: Long? = null,
+
+    @SerializedName("new_item")
+    val newItem: DataChannelItem? = null
 )
 
 @Serializable
@@ -61,6 +69,8 @@ enum class MessageType(val value: String) {
 }
 
 @Serializable
-enum class DataChannelResponseTypeType(val value: String) {
+enum class ResType(val value: String) {
+    @SerializedName("OnDelete") OnDelete("OnDelete"),
+    @SerializedName("OnEdit") OnEdit("OnEdit"),
     @SerializedName("OnNew") OnNew("OnNew");
 }
