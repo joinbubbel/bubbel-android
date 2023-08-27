@@ -35,10 +35,10 @@ enum class ErrorType(val value: String) {
 
 @Serializable
 data class DataChannelResponseType (
+    val chunk: Long,
+    val index: Long,
     val item: DataChannelItem? = null,
     val type: ResType,
-    val chunk: Long? = null,
-    val index: Long? = null,
 
     @SerializedName("new_item")
     val newItem: DataChannelItem? = null
