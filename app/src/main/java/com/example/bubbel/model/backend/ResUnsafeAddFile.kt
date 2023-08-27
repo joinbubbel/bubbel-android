@@ -19,13 +19,17 @@ data class ResUnsafeAddFile (
 
 @Serializable
 data class UnsafeAddFileError (
-    val ierror: String,
-    val type: Type
+    @SerializedName("base64_error")
+    val base64Error: String? = null,
+
+    val type: ResUnsafeAddFileErrorType,
+    val ierror: String? = null
 )
 
 @Serializable
 enum class ResUnsafeAddFileErrorType(val value: String) {
-    @SerializedName("Internal") Internal("Internal");
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("InvalidBase64") InvalidBase64("InvalidBase64");
 }
 
 @Serializable
