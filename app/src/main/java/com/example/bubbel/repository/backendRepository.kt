@@ -68,6 +68,18 @@ interface backendService {
     fun getRandomUsers(@Body userData: InGetRandomUsers): Call<ResGetRandomUsers>
     @POST("/api/username_to_id")
     fun usernameToId(@Body userData: InUsernameToId): Call<ResUsernameToId>
+    @POST("/api/create_message_room")
+    fun createMessageRoom(@Body userData: InCreateMessageRoom): Call<ResCreateMessageRoom>
+    @POST("/api/get_message_room")
+    fun getMessageRoom(@Body userData: InGetMessageRoom): Call<ResGetMessageRoom>
+    @POST("/api/join_message_room")
+    fun joinMessageRoom(@Body userData: InJoinMessageRoom): Call<ResJoinMessageRoom>
+    @POST("/api/get_club_message_rooms")
+    fun getClubMessageRooms(@Body userData: InGetClubMessageRooms): Call<ResGetClubMessageRooms>
+    @POST("/api/get_message_room_members")
+    fun getMessageRoomMembers(@Body userData: InGetMessageRoomMembers): Call<ResGetMessageRoomMembers>
+    @POST("/api/upload_base64")
+    fun uploadBase64(@Body userData: InUploadBase64): Call<ResUploadBase64>
 }
 
 //  This was originally went in "RetrofitClient.kt"
@@ -545,6 +557,102 @@ class BackendRepository {
             }
 
             override fun onFailure(call: Call<ResUsernameToId>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun createMessageRoom(request: InCreateMessageRoom,  onSuccess: (ResCreateMessageRoom?) -> Unit, onError: (String) -> Unit){
+        backendService.createMessageRoom(request).enqueue(object : Callback<ResCreateMessageRoom> {
+            override fun onResponse(call: Call<ResCreateMessageRoom>, response: Response<ResCreateMessageRoom>) {
+                if (response.isSuccessful) {
+                    val out: ResCreateMessageRoom? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResCreateMessageRoom>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun getMessageRoom(request: InGetMessageRoom,  onSuccess: (ResGetMessageRoom?) -> Unit, onError: (String) -> Unit){
+        backendService.getMessageRoom(request).enqueue(object : Callback<ResGetMessageRoom> {
+            override fun onResponse(call: Call<ResGetMessageRoom>, response: Response<ResGetMessageRoom>) {
+                if (response.isSuccessful) {
+                    val out: ResGetMessageRoom? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResGetMessageRoom>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun joinMessageRoom(request: InJoinMessageRoom,  onSuccess: (ResJoinMessageRoom?) -> Unit, onError: (String) -> Unit){
+        backendService.joinMessageRoom(request).enqueue(object : Callback<ResJoinMessageRoom> {
+            override fun onResponse(call: Call<ResJoinMessageRoom>, response: Response<ResJoinMessageRoom>) {
+                if (response.isSuccessful) {
+                    val out: ResJoinMessageRoom? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResJoinMessageRoom>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun getClubMessageRooms(request: InGetClubMessageRooms,  onSuccess: (ResGetClubMessageRooms?) -> Unit, onError: (String) -> Unit){
+        backendService.getClubMessageRooms(request).enqueue(object : Callback<ResGetClubMessageRooms> {
+            override fun onResponse(call: Call<ResGetClubMessageRooms>, response: Response<ResGetClubMessageRooms>) {
+                if (response.isSuccessful) {
+                    val out: ResGetClubMessageRooms? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResGetClubMessageRooms>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun getMessageRoomMembers(request: InGetMessageRoomMembers,  onSuccess: (ResGetMessageRoomMembers?) -> Unit, onError: (String) -> Unit){
+        backendService.getMessageRoomMembers(request).enqueue(object : Callback<ResGetMessageRoomMembers> {
+            override fun onResponse(call: Call<ResGetMessageRoomMembers>, response: Response<ResGetMessageRoomMembers>) {
+                if (response.isSuccessful) {
+                    val out: ResGetMessageRoomMembers? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResGetMessageRoomMembers>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun uploadBase64(request: InUploadBase64,  onSuccess: (ResUploadBase64?) -> Unit, onError: (String) -> Unit){
+        backendService.uploadBase64(request).enqueue(object : Callback<ResUploadBase64> {
+            override fun onResponse(call: Call<ResUploadBase64>, response: Response<ResUploadBase64>) {
+                if (response.isSuccessful) {
+                    val out: ResUploadBase64? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResUploadBase64>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }
         })
