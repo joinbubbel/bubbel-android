@@ -82,6 +82,8 @@ interface backendService {
     fun uploadBase64(@Body userData: InUploadBase64): Call<ResUploadBase64>
     @POST("/api/upload_loose_base64")
     fun uploadLooseBase64(@Body userData: InUploadLooseBase64): Call<ResUploadLooseBase64>
+    @POST("/api/resolve_and_upload")
+    fun resolveAndUpload(@Body userData: InResolveAndUpload): Call<ResResolveAndUpload>
 }
 
 //  This was originally went in "RetrofitClient.kt"
@@ -671,6 +673,22 @@ class BackendRepository {
             }
 
             override fun onFailure(call: Call<ResUploadLooseBase64>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun resolveAndUpload(request: InResolveAndUpload,  onSuccess: (ResResolveAndUpload?) -> Unit, onError: (String) -> Unit){
+        backendService.resolveAndUpload(request).enqueue(object : Callback<ResResolveAndUpload> {
+            override fun onResponse(call: Call<ResResolveAndUpload>, response: Response<ResResolveAndUpload>) {
+                if (response.isSuccessful) {
+                    val out: ResResolveAndUpload? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResResolveAndUpload>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }
         })
