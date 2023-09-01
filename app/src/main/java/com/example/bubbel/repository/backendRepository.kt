@@ -80,6 +80,8 @@ interface backendService {
     fun getMessageRoomMembers(@Body userData: InGetMessageRoomMembers): Call<ResGetMessageRoomMembers>
     @POST("/api/upload_base64")
     fun uploadBase64(@Body userData: InUploadBase64): Call<ResUploadBase64>
+    @POST("/api/upload_loose_base64")
+    fun uploadLooseBase64(@Body userData: InUploadLooseBase64): Call<ResUploadLooseBase64>
 }
 
 //  This was originally went in "RetrofitClient.kt"
@@ -653,6 +655,22 @@ class BackendRepository {
             }
 
             override fun onFailure(call: Call<ResUploadBase64>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun uploadLooseBase64(request: InUploadLooseBase64,  onSuccess: (ResUploadLooseBase64?) -> Unit, onError: (String) -> Unit){
+        backendService.uploadLooseBase64(request).enqueue(object : Callback<ResUploadLooseBase64> {
+            override fun onResponse(call: Call<ResUploadLooseBase64>, response: Response<ResUploadLooseBase64>) {
+                if (response.isSuccessful) {
+                    val out: ResUploadLooseBase64? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResUploadLooseBase64>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }
         })
