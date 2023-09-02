@@ -5,6 +5,7 @@
 
 package com.example.bubbel.model.backend
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import kotlinx.serialization.descriptors.*
@@ -19,7 +20,7 @@ data class ResUnsafeAddFile (
 @Serializable
 data class UnsafeAddFileError (
     val ierror: String,
-    val type: Type
+    val type: ResUnsafeAddFileErrorType
 )
 
 @Serializable

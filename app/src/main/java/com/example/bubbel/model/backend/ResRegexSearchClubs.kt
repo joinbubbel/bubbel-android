@@ -5,6 +5,7 @@
 
 package com.example.bubbel.model.backend
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import kotlinx.serialization.descriptors.*
@@ -30,11 +31,11 @@ enum class ResRegexSearchClubsErrorType(val value: String) {
 
 @Serializable
 data class RegexSearchClubsOut (
-    val clubs: List<List<Club>>
+    val clubs: List<List<Clubs>>
 )
 
 @Serializable
 sealed class Club {
-    class IntegerValue(val value: Long)  : Club()
-    class StringValue(val value: String) : Club()
+    class IntegerValue(val value: Long)  : Clubs()
+    class StringValue(val value: String) : Clubs()
 }

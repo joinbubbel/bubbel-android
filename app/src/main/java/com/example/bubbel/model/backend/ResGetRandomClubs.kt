@@ -5,6 +5,7 @@
 
 package com.example.bubbel.model.backend
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import kotlinx.serialization.descriptors.*
@@ -19,7 +20,7 @@ data class ResGetRandomClubs (
 @Serializable
 data class GetRandomClubsError (
     val ierror: String,
-    val type: Type
+    val type: ResGetRandomClubsErrorType
 )
 
 @Serializable
@@ -29,13 +30,13 @@ enum class ResGetRandomClubsErrorType(val value: String) {
 
 @Serializable
 data class GetRandomClubsOut (
-    val clubs: List<List<Club>>
+    val clubs: List<List<Clubs>>
 )
 
 @Serializable
-sealed class Club {
-    class ClubProfileValue(val value: ClubProfile) : Club()
-    class IntegerValue(val value: Long)            : Club()
+sealed class Clubs {
+    class ClubsProfileValue(val value: ClubProfile) : Clubs()
+    class IntegerValue(val value: Long)            : Clubs()
 }
 
 @Serializable
