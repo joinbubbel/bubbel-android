@@ -1,5 +1,7 @@
 package com.example.bubbel.viewmodel.onboarding
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,9 +9,11 @@ import com.example.bubbel.model.backend.InAuthUser
 import com.example.bubbel.model.backend.ResAuthUser
 import com.example.bubbel.repository.BackendRepository
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
-    private  val  backendRepository = BackendRepository()
+    private val context = getApplication<Application>().applicationContext
+
+    private  val  backendRepository = BackendRepository(context)
 
     val _reAuthUser = MutableLiveData<ResAuthUser?>()
 
