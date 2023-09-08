@@ -11,7 +11,7 @@ class BackendRepository (context: Context) {
 
     private val retrofitClient = RetrofitClient(context).api.create(BackendService::class.java)
 
-    fun createUser(request: InCreateUser, onSuccess: (ResCreateUser?) -> Unit, onError: (String) -> Unit){
+    suspend fun createUser(request: InCreateUser, onSuccess: (ResCreateUser?) -> Unit, onError: (String) -> Unit){
         retrofitClient.createUser(request).enqueue(object : Callback<ResCreateUser> {
             override fun onResponse(call: Call<ResCreateUser>, response: Response<ResCreateUser>) {
                 if (response.isSuccessful) {
@@ -27,7 +27,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-    fun authUser(request: InAuthUser,  onSuccess: (ResAuthUser?) -> Unit, onError: (String) -> Unit){
+    suspend fun authUser(request: InAuthUser,  onSuccess: (ResAuthUser?) -> Unit, onError: (String) -> Unit){
         retrofitClient.authUser(request).enqueue(object : Callback<ResAuthUser> {
             override fun onResponse(call: Call<ResAuthUser>, response: Response<ResAuthUser>) {
                 if (response.isSuccessful) {
@@ -43,7 +43,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-    fun deauthUser(request: InDeauthUser,  onSuccess: (ResDeauthUser?) -> Unit, onError: (String) -> Unit){
+    suspend fun deauthUser(request: InDeauthUser,  onSuccess: (ResDeauthUser?) -> Unit, onError: (String) -> Unit){
         retrofitClient.deauthUser(request).enqueue(object : Callback<ResDeauthUser> {
             override fun onResponse(call: Call<ResDeauthUser>, response: Response<ResDeauthUser>) {
                 if (response.isSuccessful) {
@@ -59,7 +59,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-    fun verifyAccount(request: InVerifyAccount,  onSuccess: (ResVerifyAccount?) -> Unit, onError: (String) -> Unit){
+    suspend fun verifyAccount(request: InVerifyAccount,  onSuccess: (ResVerifyAccount?) -> Unit, onError: (String) -> Unit){
         retrofitClient.verifyAccount(request).enqueue(object : Callback<ResVerifyAccount> {
             override fun onResponse(call: Call<ResVerifyAccount>, response: Response<ResVerifyAccount>) {
                 if (response.isSuccessful) {
@@ -74,7 +74,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-    fun sendVerify(request: InSendVerify,  onSuccess: (ResSendVerify?) -> Unit, onError: (String) -> Unit){
+    suspend fun sendVerify(request: InSendVerify,  onSuccess: (ResSendVerify?) -> Unit, onError: (String) -> Unit){
         retrofitClient.sendVerify(request).enqueue(object : Callback<ResSendVerify> {
             override fun onResponse(call: Call<ResSendVerify>, response: Response<ResSendVerify>) {
                 if (response.isSuccessful) {
@@ -90,7 +90,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-    fun setUserProfile(request: InSetUserProfile,  onSuccess: (ResSetUserProfile?) -> Unit, onError: (String) -> Unit){
+    suspend fun setUserProfile(request: InSetUserProfile,  onSuccess: (ResSetUserProfile?) -> Unit, onError: (String) -> Unit){
         retrofitClient.setUserProfile(request).enqueue(object : Callback<ResSetUserProfile> {
             override fun onResponse(call: Call<ResSetUserProfile>, response: Response<ResSetUserProfile>) {
                 if (response.isSuccessful) {
@@ -106,7 +106,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-    fun getUserProfile(request: InGetUserProfile,  onSuccess: (ResGetUserProfile?) -> Unit, onError: (String) -> Unit){
+    suspend fun getUserProfile(request: InGetUserProfile,  onSuccess: (ResGetUserProfile?) -> Unit, onError: (String) -> Unit){
         retrofitClient.getUserProfile(request).enqueue(object : Callback<ResGetUserProfile> {
             override fun onResponse(call: Call<ResGetUserProfile>, response: Response<ResGetUserProfile>) {
                 if (response.isSuccessful) {
@@ -122,7 +122,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-    fun deleteUser(request: InDeleteUser,  onSuccess: (ResDeleteUser?) -> Unit, onError: (String) -> Unit){
+    suspend fun deleteUser(request: InDeleteUser,  onSuccess: (ResDeleteUser?) -> Unit, onError: (String) -> Unit){
         retrofitClient.deleteUser(request).enqueue(object : Callback<ResDeleteUser> {
             override fun onResponse(call: Call<ResDeleteUser>, response: Response<ResDeleteUser>) {
                 if (response.isSuccessful) {
@@ -138,7 +138,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-    fun createClub(request: InCreateClub,  onSuccess: (ResCreateClub?) -> Unit, onError: (String) -> Unit){
+    suspend fun createClub(request: InCreateClub,  onSuccess: (ResCreateClub?) -> Unit, onError: (String) -> Unit){
         retrofitClient.createClub(request).enqueue(object : Callback<ResCreateClub> {
             override fun onResponse(call: Call<ResCreateClub>, response: Response<ResCreateClub>) {
                 if (response.isSuccessful) {
@@ -154,7 +154,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-    fun getClubProfile(request: InGetClubProfile,  onSuccess: (ResGetClubProfile?) -> Unit, onError: (String) -> Unit){
+    suspend fun getClubProfile(request: InGetClubProfile,  onSuccess: (ResGetClubProfile?) -> Unit, onError: (String) -> Unit){
         retrofitClient.getClubProfile(request).enqueue(object : Callback<ResGetClubProfile> {
             override fun onResponse(call: Call<ResGetClubProfile>, response: Response<ResGetClubProfile>) {
                 if (response.isSuccessful) {
@@ -170,7 +170,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun setClubProfile(request: InSetClubProfile,  onSuccess: (ResSetClubProfile?) -> Unit, onError: (String) -> Unit){
+    suspend fun setClubProfile(request: InSetClubProfile,  onSuccess: (ResSetClubProfile?) -> Unit, onError: (String) -> Unit){
         retrofitClient.setClubProfile(request).enqueue(object : Callback<ResSetClubProfile> {
             override fun onResponse(call: Call<ResSetClubProfile>, response: Response<ResSetClubProfile>) {
                 if (response.isSuccessful) {
@@ -186,7 +186,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun deleteClub(request: InDeleteClub,  onSuccess: (ResDeleteClub?) -> Unit, onError: (String) -> Unit){
+    suspend fun deleteClub(request: InDeleteClub,  onSuccess: (ResDeleteClub?) -> Unit, onError: (String) -> Unit){
         retrofitClient.deleteClub(request).enqueue(object : Callback<ResDeleteClub> {
             override fun onResponse(call: Call<ResDeleteClub>, response: Response<ResDeleteClub>) {
                 if (response.isSuccessful) {
@@ -202,7 +202,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun getUserProfileWithUsername(request: InGetUserProfileWithUsername,  onSuccess: (ResGetUserProfileWithUsername?) -> Unit, onError: (String) -> Unit){
+    suspend fun getUserProfileWithUsername(request: InGetUserProfileWithUsername,  onSuccess: (ResGetUserProfileWithUsername?) -> Unit, onError: (String) -> Unit){
         retrofitClient.getUserProfileWithUsername(request).enqueue(object : Callback<ResGetUserProfileWithUsername> {
             override fun onResponse(call: Call<ResGetUserProfileWithUsername>, response: Response<ResGetUserProfileWithUsername>) {
                 if (response.isSuccessful) {
@@ -218,7 +218,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun addFriendConnection(request: InAddFriendConnection,  onSuccess: (ResAddFriendConnection?) -> Unit, onError: (String) -> Unit){
+    suspend fun addFriendConnection(request: InAddFriendConnection,  onSuccess: (ResAddFriendConnection?) -> Unit, onError: (String) -> Unit){
         retrofitClient.addFriendConnection(request).enqueue(object : Callback<ResAddFriendConnection> {
             override fun onResponse(call: Call<ResAddFriendConnection>, response: Response<ResAddFriendConnection>) {
                 if (response.isSuccessful) {
@@ -234,7 +234,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun getFriendConnections(request: InGetFriendConnections,  onSuccess: (ResGetFriendConnections?) -> Unit, onError: (String) -> Unit){
+    suspend fun getFriendConnections(request: InGetFriendConnections,  onSuccess: (ResGetFriendConnections?) -> Unit, onError: (String) -> Unit){
         retrofitClient.getFriendConnections(request).enqueue(object : Callback<ResGetFriendConnections> {
             override fun onResponse(call: Call<ResGetFriendConnections>, response: Response<ResGetFriendConnections>) {
                 if (response.isSuccessful) {
@@ -250,7 +250,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun removeFriend(request: InRemoveFriend,  onSuccess: (ResRemoveFriend?) -> Unit, onError: (String) -> Unit){
+    suspend fun removeFriend(request: InRemoveFriend,  onSuccess: (ResRemoveFriend?) -> Unit, onError: (String) -> Unit){
         retrofitClient.removeFriend(request).enqueue(object : Callback<ResRemoveFriend> {
             override fun onResponse(call: Call<ResRemoveFriend>, response: Response<ResRemoveFriend>) {
                 if (response.isSuccessful) {
@@ -266,7 +266,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun joinClub(request: InJoinClub,  onSuccess: (ResJoinClub?) -> Unit, onError: (String) -> Unit){
+    suspend fun joinClub(request: InJoinClub,  onSuccess: (ResJoinClub?) -> Unit, onError: (String) -> Unit){
         retrofitClient.joinClub(request).enqueue(object : Callback<ResJoinClub> {
             override fun onResponse(call: Call<ResJoinClub>, response: Response<ResJoinClub>) {
                 if (response.isSuccessful) {
@@ -282,7 +282,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun unjoinClub(request: InUnjoinClub,  onSuccess: (ResUnjoinClub?) -> Unit, onError: (String) -> Unit){
+    suspend fun unjoinClub(request: InUnjoinClub,  onSuccess: (ResUnjoinClub?) -> Unit, onError: (String) -> Unit){
         retrofitClient.unjoinClub(request).enqueue(object : Callback<ResUnjoinClub> {
             override fun onResponse(call: Call<ResUnjoinClub>, response: Response<ResUnjoinClub>) {
                 if (response.isSuccessful) {
@@ -298,7 +298,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun getClubMembers(request: InGetClubMembers,  onSuccess: (ResGetClubMembers?) -> Unit, onError: (String) -> Unit){
+    suspend fun getClubMembers(request: InGetClubMembers,  onSuccess: (ResGetClubMembers?) -> Unit, onError: (String) -> Unit){
         retrofitClient.getClubMembers(request).enqueue(object : Callback<ResGetClubMembers> {
             override fun onResponse(call: Call<ResGetClubMembers>, response: Response<ResGetClubMembers>) {
                 if (response.isSuccessful) {
@@ -314,7 +314,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun getUserClubs(request: InGetUserClubs,  onSuccess: (ResGetUserClubs?) -> Unit, onError: (String) -> Unit){
+    suspend fun getUserClubs(request: InGetUserClubs,  onSuccess: (ResGetUserClubs?) -> Unit, onError: (String) -> Unit){
         retrofitClient.getUserClubs(request).enqueue(object : Callback<ResGetUserClubs> {
             override fun onResponse(call: Call<ResGetUserClubs>, response: Response<ResGetUserClubs>) {
                 if (response.isSuccessful) {
@@ -330,7 +330,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun regexSearchClubs(request: InRegexSearchClubs,  onSuccess: (ResRegexSearchClubs?) -> Unit, onError: (String) -> Unit){
+    suspend fun regexSearchClubs(request: InRegexSearchClubs,  onSuccess: (ResRegexSearchClubs?) -> Unit, onError: (String) -> Unit){
         retrofitClient.regexSearchClubs(request).enqueue(object : Callback<ResRegexSearchClubs> {
             override fun onResponse(call: Call<ResRegexSearchClubs>, response: Response<ResRegexSearchClubs>) {
                 if (response.isSuccessful) {
@@ -346,7 +346,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun regexSearchUsers(request: InRegexSearchUsers,  onSuccess: (ResRegexSearchUsers?) -> Unit, onError: (String) -> Unit){
+    suspend fun regexSearchUsers(request: InRegexSearchUsers,  onSuccess: (ResRegexSearchUsers?) -> Unit, onError: (String) -> Unit){
         retrofitClient.regexSearchUsers(request).enqueue(object : Callback<ResRegexSearchUsers> {
             override fun onResponse(call: Call<ResRegexSearchUsers>, response: Response<ResRegexSearchUsers>) {
                 if (response.isSuccessful) {
@@ -362,7 +362,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun getRandomClubs(request: InGetRandomClubs,  onSuccess: (ResGetRandomClubs?) -> Unit, onError: (String) -> Unit){
+    suspend fun getRandomClubs(request: InGetRandomClubs,  onSuccess: (ResGetRandomClubs?) -> Unit, onError: (String) -> Unit){
         retrofitClient.getRandomClubs(request).enqueue(object : Callback<ResGetRandomClubs> {
             override fun onResponse(call: Call<ResGetRandomClubs>, response: Response<ResGetRandomClubs>) {
                 if (response.isSuccessful) {
@@ -378,7 +378,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun checkToken(request: InCheckToken,  onSuccess: (ResCheckToken?) -> Unit, onError: (String) -> Unit){
+    suspend fun checkToken(request: InCheckToken,  onSuccess: (ResCheckToken?) -> Unit, onError: (String) -> Unit){
         retrofitClient.checkToken(request).enqueue(object : Callback<ResCheckToken> {
             override fun onResponse(call: Call<ResCheckToken>, response: Response<ResCheckToken>) {
                 if (response.isSuccessful) {
@@ -394,7 +394,7 @@ class BackendRepository (context: Context) {
             }
         })
     }
-     fun unsafeAddFile(request: InUnsafeAddFile,  onSuccess: (ResUnsafeAddFile?) -> Unit, onError: (String) -> Unit){
+    suspend fun unsafeAddFile(request: InUnsafeAddFile,  onSuccess: (ResUnsafeAddFile?) -> Unit, onError: (String) -> Unit){
         retrofitClient.unsafeAddFile(request).enqueue(object : Callback<ResUnsafeAddFile> {
             override fun onResponse(call: Call<ResUnsafeAddFile>, response: Response<ResUnsafeAddFile>) {
                 if (response.isSuccessful) {
