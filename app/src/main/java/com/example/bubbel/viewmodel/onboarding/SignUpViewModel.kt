@@ -1,5 +1,7 @@
 package com.example.bubbel.viewmodel.onboarding
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,9 +18,11 @@ import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
 
-class SignUpViewModel : ViewModel() {
+class SignUpViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val backendRepository = BackendRepository()
+    private val context = getApplication<Application>().applicationContext
+
+    private val backendRepository = BackendRepository(context)
 
     val _reAuthUser = MutableLiveData<ResAuthUser?>()
 

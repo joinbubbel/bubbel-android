@@ -5,10 +5,12 @@
 
 package com.example.bubbel.model.backend
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
+import java.lang.reflect.Type
 
 @Serializable
 data class ResGetRandomClubs (
@@ -32,11 +34,6 @@ data class GetRandomClubsOut (
     val clubs: List<List<Club>>
 )
 
-@Serializable
-sealed class Club {
-    class ClubProfileValue(val value: ClubProfile) : Club()
-    class IntegerValue(val value: Long)            : Club()
-}
 
 @Serializable
 data class ClubProfile (

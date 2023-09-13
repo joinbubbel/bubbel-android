@@ -9,6 +9,8 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
+import com.google.gson.annotations.SerializedName
+import java.lang.reflect.Type
 
 @Serializable
 data class ResCheckToken (
