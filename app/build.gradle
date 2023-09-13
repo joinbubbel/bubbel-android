@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace 'com.example.bubbel'
-    compileSdk 33
+    compileSdk 34
     useLibrary("org.apache.http.legacy")
 
 
@@ -17,7 +17,7 @@ android {
     defaultConfig {
         applicationId "com.example.bubbel"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
