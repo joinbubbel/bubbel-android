@@ -84,6 +84,12 @@ interface backendService {
     fun uploadLooseBase64(@Body userData: InUploadLooseBase64): Call<ResUploadLooseBase64>
     @POST("/api/resolve_and_upload")
     fun resolveAndUpload(@Body userData: InResolveAndUpload): Call<ResResolveAndUpload>
+    @POST("/api/create_message_group")
+    fun createMessageGroup(@Body userData: InCreateMessageGroup): Call<ResCreateMessageGroup>
+    @POST("/api/add_user_to_message_group")
+    fun addUserToMessageGroup(@Body userData: InAddUserToMessageGroup): Call<ResAddUserToMessageGroup>
+    @POST("/api/get_club_id_with_name")
+    fun getClubIdWithName(@Body userData: InGetClubIdWithName): Call<ResGetClubIdWithName>
 }
 
 //  This was originally went in "RetrofitClient.kt"
@@ -689,6 +695,54 @@ class BackendRepository {
             }
 
             override fun onFailure(call: Call<ResResolveAndUpload>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun createMessageGroup(request: InCreateMessageGroup,  onSuccess: (ResCreateMessageGroup?) -> Unit, onError: (String) -> Unit){
+        backendService.createMessageGroup(request).enqueue(object : Callback<ResCreateMessageGroup> {
+            override fun onResponse(call: Call<ResCreateMessageGroup>, response: Response<ResCreateMessageGroup>) {
+                if (response.isSuccessful) {
+                    val out: ResCreateMessageGroup? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResCreateMessageGroup>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun addUserToMessageGroup(request: InAddUserToMessageGroup,  onSuccess: (ResAddUserToMessageGroup?) -> Unit, onError: (String) -> Unit){
+        backendService.addUserToMessageGroup(request).enqueue(object : Callback<ResAddUserToMessageGroup> {
+            override fun onResponse(call: Call<ResAddUserToMessageGroup>, response: Response<ResAddUserToMessageGroup>) {
+                if (response.isSuccessful) {
+                    val out: ResAddUserToMessageGroup? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResAddUserToMessageGroup>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun getClubIdWithName(request: InGetClubIdWithName,  onSuccess: (ResGetClubIdWithName?) -> Unit, onError: (String) -> Unit){
+        backendService.getClubIdWithName(request).enqueue(object : Callback<ResGetClubIdWithName> {
+            override fun onResponse(call: Call<ResGetClubIdWithName>, response: Response<ResGetClubIdWithName>) {
+                if (response.isSuccessful) {
+                    val out: ResGetClubIdWithName? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResGetClubIdWithName>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }
         })

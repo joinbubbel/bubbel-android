@@ -27,6 +27,9 @@ data class ResolveAndUploadError (
     @SerializedName("fetch_bytes_error")
     val fetchBytesError: String? = null,
 
+    @SerializedName("data_constraint_error")
+    val dataConstraintError: String? = null,
+
     val ierror: String? = null
 )
 

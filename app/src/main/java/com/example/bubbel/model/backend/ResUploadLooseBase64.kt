@@ -20,6 +20,10 @@ data class ResUploadLooseBase64 (
 @Serializable
 data class UploadLooseBase64Error (
     val type: ResUploadLooseBase64ErrorType,
+
+    @SerializedName("data_constraint_error")
+    val dataConstraintError: String? = null,
+
     val ierror: String? = null
 )
 
