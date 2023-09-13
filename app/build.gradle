@@ -78,14 +78,14 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json")
-    implementation 'org.apache.httpcomponents:httpclient-android'
-    implementation("com.squareup.okhttp3:okhttp")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+    implementation 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
     implementation 'androidx.compose.material:material-icons-core'
     implementation 'androidx.compose.material:material-icons-extended'
-    implementation 'androidx.fragment:fragment-ktx'
-    implementation("androidx.navigation:navigation-fragment-ktx")
-    implementation("androidx.navigation:navigation-ui-ktx")
+    implementation 'androidx.fragment:fragment-ktx:1.6.1'
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.2")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.2")
     implementation 'com.google.code.gson:gson'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core' // replace with the latest version
@@ -93,13 +93,13 @@ dependencies {
 
 
     // retrofit
-    implementation "com.squareup.retrofit2:retrofit"
-    implementation "com.squareup.retrofit2:converter-gson"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx" // or a newer version if available
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx" // or a newer version if available
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2" // or a newer version if available
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0" // or a newer version if available
 
 
-    implementation("androidx.navigation:navigation-fragment-ktx")
-    implementation("androidx.navigation:navigation-ui-ktx")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.2")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.2")
 }
