@@ -10,6 +10,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
+import java.lang.reflect.Type
 
 @Serializable
 data class ResCheckToken (
