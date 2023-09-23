@@ -14,7 +14,7 @@ import kotlinx.serialization.encoding.*
 @Serializable
 data class ResVerifyAccount (
     val error: VerifyAccountError? = null,
-    val res: JsonElement? = null
+    val res: VerifyAccountOut? = null
 )
 
 /**
@@ -29,5 +29,11 @@ data class VerifyAccountError (
 @Serializable
 enum class ResVerifyAccountErrorType(val value: String) {
     @SerializedName("CodeTimedOutOrAlreadyVerifiedOrInvalidCode") CodeTimedOutOrAlreadyVerifiedOrInvalidCode("CodeTimedOutOrAlreadyVerifiedOrInvalidCode"),
-    @SerializedName("Internal") Internal("Internal");
+    @SerializedName("Internal") Internal("Internal"),
+    @SerializedName("UserNotFound") UserNotFound("UserNotFound");
 }
+
+@Serializable
+data class VerifyAccountOut (
+    val token: String? = null
+)
