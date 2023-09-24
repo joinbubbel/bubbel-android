@@ -96,6 +96,10 @@ interface backendService {
     fun getMessageGroupMembers(@Body userData: InGetMessageGroupMembers): Call<ResGetMessageGroupMembers>
     @POST("/api/get_user_message_groups")
     fun getUserMessageGroups(@Body userData: InGetUserMessageGroups): Call<ResGetUserMessageGroups>
+    @POST("/api/get_message_group_name")
+    fun getMessageGroupName(@Body userData: InGetMessageGroupName): Call<ResGetMessageGroupName>
+    @POST("/api/set_message_group_name")
+    fun setMessageGroupName(@Body userData: InSetMessageGroupName): Call<ResSetMessageGroupName>
 }
 
 //  This was originally went in "RetrofitClient.kt"
@@ -797,6 +801,38 @@ class BackendRepository {
             }
 
             override fun onFailure(call: Call<ResGetUserMessageGroups>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun getMessageGroupName(request: InGetMessageGroupName,  onSuccess: (ResGetMessageGroupName?) -> Unit, onError: (String) -> Unit){
+        backendService.getMessageGroupName(request).enqueue(object : Callback<ResGetMessageGroupName> {
+            override fun onResponse(call: Call<ResGetMessageGroupName>, response: Response<ResGetMessageGroupName>) {
+                if (response.isSuccessful) {
+                    val out: ResGetMessageGroupName? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResGetMessageGroupName>, t: Throwable) {
+                onError(t.message ?: "Network request failed")
+            }
+        })
+    }
+    suspend fun setMessageGroupName(request: InSetMessageGroupName,  onSuccess: (ResSetMessageGroupName?) -> Unit, onError: (String) -> Unit){
+        backendService.setMessageGroupName(request).enqueue(object : Callback<ResSetMessageGroupName> {
+            override fun onResponse(call: Call<ResSetMessageGroupName>, response: Response<ResSetMessageGroupName>) {
+                if (response.isSuccessful) {
+                    val out: ResSetMessageGroupName? = response.body()
+                    onSuccess(out)
+                } else {
+                    onError(response.errorBody()?.string() ?: "Unknown error occurred")
+                }
+            }
+
+            override fun onFailure(call: Call<ResSetMessageGroupName>, t: Throwable) {
                 onError(t.message ?: "Network request failed")
             }
         })
