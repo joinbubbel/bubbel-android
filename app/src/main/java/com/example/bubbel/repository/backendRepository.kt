@@ -5,55 +5,7 @@ import com.example.bubbel.model.backend.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.POST
 
-interface backendService {
-    @POST("/api/create_user")
-    fun createUser(@Body userData: InCreateUser): Call<ResCreateUser>
-    @POST("/api/auth_user")
-    fun authUser(@Body userData: InAuthUser): Call<ResAuthUser>
-    @POST("/api/deauth_user")
-    fun deauthUser(@Body userData: InDeauthUser): Call<ResDeauthUser>
-    @POST("/api/verify_account")
-    fun verifyAccount(@Body userData: InVerifyAccount): Call<ResVerifyAccount>
-    @POST("/api/send_verify")
-    fun sendVerify(@Body userData: InSendVerify): Call<ResSendVerify>
-    @POST("/api/set_user_profile")
-    fun setUserProfile(@Body userData: InSetUserProfile): Call<ResSetUserProfile>
-    @POST("/api/get_user_profile")
-    fun getUserProfile(@Body userData: InGetUserProfile): Call<ResGetUserProfile>
-    @POST("/api/delete_user")
-    fun deleteUser(@Body userData: InDeleteUser): Call<ResDeleteUser>
-    @POST("/api/create_club")
-    fun createClub(@Body userData: InCreateClub): Call<ResCreateClub>
-    @POST("/api/get_club_profile")
-    fun getClubProfile(@Body userData: InGetClubProfile): Call<ResGetClubProfile>
-    @POST("/api/set_club_profile")
-    fun setClubProfile(@Body userData: InSetClubProfile): Call<ResSetClubProfile>
-    @POST("/api/delete_club")
-    fun deleteClub(@Body userData: InDeleteClub): Call<ResDeleteClub>
-    @POST("/api/get_user_profile_with_username")
-    fun getUserProfileWithUsername(@Body userData: InGetUserProfileWithUsername): Call<ResGetUserProfileWithUsername>
-    @POST("/api/add_friend_connection")
-    fun addFriendConnection(@Body userData: InAddFriendConnection): Call<ResAddFriendConnection>
-    @POST("/api/get_friend_connections")
-    fun getFriendConnections(@Body userData: InGetFriendConnections): Call<ResGetFriendConnections>
-    @POST("/api/remove_friend")
-    fun removeFriend(@Body userData: InRemoveFriend): Call<ResRemoveFriend>
-    @POST("/api/join_club")
-    fun joinClub(@Body userData: InJoinClub): Call<ResJoinClub>
-    @POST("/api/unjoin_club")
-    fun unjoinClub(@Body userData: InUnjoinClub): Call<ResUnjoinClub>
-    @POST("/api/get_club_members")
-    fun getClubMembers(@Body userData: InGetClubMembers): Call<ResGetClubMembers>
-    @POST("/api/get_user_clubs")
-    fun getUserClubs(@Body userData: InGetUserClubs): Call<ResGetUserClubs>
-    @POST("/api/regex_search_clubs")
-    fun regexSearchClubs(@Body userData: InRegexSearchClubs): Call<ResRegexSearchClubs>
-    @POST("/api/regex_search_users")
-    fun regexSearchUsers(@Body userData: InRegexSearchUsers): Call<ResRegexSearchUsers>
-}
 
 class BackendRepository (context: Context) {
 
