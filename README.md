@@ -212,15 +212,6 @@ Run tests with:
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Developer
-
-**Your Name** - [your.email@example.com](mailto:your.email@example.com)
-
-**LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
-
-**Portfolio**: [Your Portfolio](https://yourportfolio.com)
-
 ---
 
 ⭐ **Star this repository if you found it helpful!**
